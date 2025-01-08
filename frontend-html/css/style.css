@@ -1,0 +1,113 @@
+@import url('https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
+
+body{
+    margin: 0px;
+    font-family: "Open Sans", serif;
+}
+header .logo-img img{
+    height: 40px;
+    width: auto;
+    object-fit: contain;
+}
+header .menu-bar{
+    list-style: none;
+    padding: 0px;
+    display: flex;
+    column-gap: 20px;
+    margin: 0px;
+    justify-content: center;
+}
+header .menu-bar li a{
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    color: #1a1a1a;
+}
+.land-sec{
+    padding-top: 70px;
+    text-align: center;
+}
+.land-sec img{
+    /* text-align: center; */
+    height: 50px;
+    width: auto;
+    object-fit: contain;
+    margin: 0 auto;
+    display: flex;
+}
+.land-sec .inner-text{
+    text-align: center;
+    padding-top: 20px;
+}
+.land-sec .inner-text .land-points{
+    padding: 0px;
+    margin: 0px;
+    list-style: none;
+    padding-top: 10px;
+}
+.land-sec .inner-text .land-points li{
+    font-size: 16px;
+    font-weight: 400;
+    margin-bottom: 5px;
+}
+.land-sec .inner-text .land-points li span{
+    font-size: 16px;
+    font-weight: 700;
+}
+.land-sec .input-box-text{
+    display: flex;
+    justify-content: flex-start;
+    column-gap: 5px;
+    width: 70%;
+    margin: 0 auto;
+    padding-bottom: 5px;
+    padding-top: 50px;
+}
+.land-sec .input-box-text .lable-text{
+    font-size: 16px;
+    color: #1a1a1a;
+    font-weight: 400;
+
+}
+.land-sec .input-box-text .lable-text-1{
+    font-size: 16px;
+    color: #808080;
+    font-weight: 400;
+}
+.land-sec .input-box-text .lable-text span{
+    font-weight: 700;
+}
+.land-sec .input-box{
+    width: 70%;
+    margin: 0 auto;
+    position: relative;
+}
+.land-sec .input-box input{
+    width: 100%;
+    height: 45px;
+    border-radius: 100px;
+    padding-left: 30px;
+    position: relative;
+}
+.land-sec .input-box .input-btn{
+    position: absolute;
+    top: 5px;
+    right: 6px;
+}
+.land-sec .input-box .input-btn a{
+    height: 35px;
+    width: 140px;
+    background: #1a1a1a;
+    color: #ffffff;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100px;
+}
+.heading{
+    font-size: 26px;
+    font-weight: 700;
+    padding-bottom:5px ;
+}
