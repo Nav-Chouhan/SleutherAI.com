@@ -55,22 +55,15 @@
                 </div>
         
                 <div class="content">
-                    <h2>Choose comment format</h2>
-                    <div class="options">
-                        <div class="option">
-                            <input type="radio" id="paragraph" name="format" checked>
-                            <label for="paragraph">Paragraph</label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" id="paragraph-titles" name="format">
-                            <label for="paragraph-titles">Paragraph with titles</label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" id="line-by-line" name="format">
-                            <label for="line-by-line">Titled line-by-line</label>
-                        </div>
+                    <h2>Personalization</h2>
+                    <div class="mb-3 step-drop-down">
+                        <label for="personalizationSelect" class="form-label">Refer to the inspector as</label>
+                        <select class="form-select" id="personalizationSelect">
+                            <option value="We">"We"</option>
+                            <option value="I">"I"</option>
+                        </select>
+                        <small class="text-muted">Example: "We recommend," or "I recommend."</small>
                     </div>
-                    <div class="description">Comments will be generated as a single, cohesive paragraph, like this one. Sleuther ensures each comment includes professional insights, such as implications of the issue, along with clear client recommendations. the goal is to provide a smooth, flowing narrative that is easy to understand.</div>
                 </div>
         
                 <div class="navigation">
