@@ -1,16 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
 
 
-body{
+body {
     margin: 0px;
     font-family: "Open Sans", serif;
 }
-header .logo-img img{
+
+header .logo-img img {
     height: 40px;
     width: auto;
     object-fit: contain;
 }
-header .menu-bar{
+
+header .menu-bar {
     list-style: none;
     padding: 0px;
     display: flex;
@@ -18,17 +20,20 @@ header .menu-bar{
     margin: 0px;
     justify-content: center;
 }
-header .menu-bar li a{
+
+header .menu-bar li a {
     font-size: 14px;
     font-weight: 500;
     text-decoration: none;
     color: #1a1a1a;
 }
-.land-sec{
+
+.land-sec {
     padding-top: 70px;
     text-align: center;
 }
-.land-sec img{
+
+.land-sec img {
     /* text-align: center; */
     height: 50px;
     width: auto;
@@ -36,26 +41,31 @@ header .menu-bar li a{
     margin: 0 auto;
     display: flex;
 }
-.land-sec .inner-text{
+
+.land-sec .inner-text {
     text-align: center;
     padding-top: 20px;
 }
-.land-sec .inner-text .land-points{
+
+.land-sec .inner-text .land-points {
     padding: 0px;
     margin: 0px;
     list-style: none;
     padding-top: 10px;
 }
-.land-sec .inner-text .land-points li{
+
+.land-sec .inner-text .land-points li {
     font-size: 16px;
     font-weight: 400;
     margin-bottom: 5px;
 }
-.land-sec .inner-text .land-points li span{
+
+.land-sec .inner-text .land-points li span {
     font-size: 16px;
     font-weight: 700;
 }
-.land-sec .input-box-text{
+
+.land-sec .input-box-text {
     display: flex;
     justify-content: flex-start;
     column-gap: 5px;
@@ -64,38 +74,45 @@ header .menu-bar li a{
     padding-bottom: 5px;
     padding-top: 50px;
 }
-.land-sec .input-box-text .lable-text{
+
+.land-sec .input-box-text .lable-text {
     font-size: 16px;
     color: #1a1a1a;
     font-weight: 400;
 
 }
-.land-sec .input-box-text .lable-text-1{
+
+.land-sec .input-box-text .lable-text-1 {
     font-size: 16px;
     color: #808080;
     font-weight: 400;
 }
-.land-sec .input-box-text .lable-text span{
+
+.land-sec .input-box-text .lable-text span {
     font-weight: 700;
 }
-.land-sec .input-box{
+
+.land-sec .input-box {
     width: 70%;
     margin: 0 auto;
     position: relative;
 }
-.land-sec .input-box input{
+
+.land-sec .input-box input {
     width: 100%;
     height: 45px;
     border-radius: 100px;
     padding-left: 30px;
     position: relative;
 }
-.land-sec .input-box .input-btn{
+
+.land-sec .input-box .input-btn {
     position: absolute;
     top: 5px;
     right: 6px;
 }
-.land-sec .input-box .input-btn a{
+
+.land-sec .input-box .input-btn a {
     height: 35px;
     width: 140px;
     background: #1a1a1a;
@@ -106,10 +123,11 @@ header .menu-bar li a{
     align-items: center;
     border-radius: 100px;
 }
-.heading{
+
+.heading {
     font-size: 26px;
     font-weight: 700;
-    padding-bottom:5px ;
+    padding-bottom: 5px;
 }
 
 
@@ -132,7 +150,7 @@ header .menu-bar li a{
     display: block;
     width: 24px;
     height: 24px;
-    border:1px solid #000;
+    border: 1px solid #000;
     color: #1a1a1a;
     border-radius: 100%;
     display: flex;
@@ -153,14 +171,14 @@ header .menu-bar li a{
 
 .content {
     margin-bottom: 20px;
+    width: 75%;
+    margin: 0 auto;
 }
 
 .content h2 {
     font-size: 18px;
-    width: 55%;
     margin: 0 auto 20px;
-    display: flex
-;
+    display: flex;
 }
 
 .options {
@@ -190,7 +208,7 @@ header .menu-bar li a{
     border-radius: 100px;
 }
 
-.option input[type="radio"]:checked + label {
+.option input[type="radio"]:checked+label {
     background-color: #b89f68;
     color: #fff;
     border-color: #b89f68;
@@ -217,21 +235,65 @@ header .menu-bar li a{
 .navigation button:hover {
     background: #444;
 }
-.description{
-    width: 50%;
+
+.description {
     margin: 0 auto;
     color: #808080;
     padding-top: 10px;
 }
-.step-drop-down{
+
+.step-drop-down {
     display: flex;
     flex-direction: column;
-    width: 55%;
+
     justify-content: center;
     margin: 0 auto;
 }
-.step-drop-down .form-select{
+
+.step-drop-down .form-select {
     height: 35px;
     padding: 0px 10px;
     border-radius: 5px;
+}
+
+
+
+fieldset {
+    border: medium none !important;
+    margin: 0 0 10px;
+    min-width: 100%;
+    padding: 0;
+    width: 100%;
+}
+
+fieldset label {
+    font-size: 10px;
+    margin: 0px;
+}
+
+fieldset input {
+    width: 100%;
+}
+
+fieldset textarea {
+    width: 100%;
+}
+
+
+
+#contact input[type="text"]:hover,
+#contact input[type="email"]:hover,
+#contact input[type="tel"]:hover,
+#contact input[type="url"]:hover,
+#contact textarea:hover {
+    -webkit-transition: border-color 0.3s ease-in-out;
+    -moz-transition: border-color 0.3s ease-in-out;
+    transition: border-color 0.3s ease-in-out;
+    border: 1px solid #aaa;
+}
+
+#contact textarea {
+    height: 100px;
+    max-width: 100%;
+    resize: none;
 }
