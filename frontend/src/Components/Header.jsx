@@ -1,7 +1,8 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { Link } from "react-router-dom";
 
-function Header() {
+function Header({ page }) {
   return (
     <header>
       <div className="container-fluid">
@@ -26,16 +27,18 @@ function Header() {
               </svg>
             </div>
           </div>
-          <div className="col-xl-2 col-lg-2 col-md-12 col-sm-12">
-            <ul className="menu-bar">
-              <li>
-                <a href="#">Pricing</a>
-              </li>
-              <li>
-                <a href="#">Log in</a>
-              </li>
-            </ul>
-          </div>
+          {page == "landing" && (
+            <div className="col-xl-2 col-lg-2 col-md-12 col-sm-12">
+              <ul className="menu-bar">
+                <li>
+                  <Link to="#">Pricing</Link>
+                </li>
+                <li>
+                  <Link to="#">Log in</Link>
+                </li>
+              </ul>
+            </div>
+          )}
         </div>
       </div>
     </header>

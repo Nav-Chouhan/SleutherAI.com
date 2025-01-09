@@ -106,6 +106,17 @@ header .menu-bar li a {
   align-items: center;
   border-radius: 100px;
 }
+.input-btn butt {
+  height: 35px;
+  width: 140px;
+  background: #1a1a1a;
+  color: #ffffff;
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100px;
+}
 .heading {
   font-size: 26px;
   font-weight: 700;
@@ -141,33 +152,29 @@ header .menu-bar li a {
 }
 .step-label {
   font-size: 12px;
-  color: #666;
+  /* color: #666; */
 }
 .content {
   margin-bottom: 20px;
+  width: 75%;
+  margin: 0 auto;
 }
 .content h2 {
   font-size: 18px;
-  width: 55%;
   margin: 0 auto 20px;
   display: flex;
 }
 .options {
   display: flex;
-  gap: 10px;
-  justify-content: center;
-}
-.selectedOption {
-  background-color: #b89f68;
-  color: #fff;
-  border-color: #b89f68;
-  border-radius: 100px;
+  gap: 30px;
+  justify-content: start;
 }
 .option {
   display: flex;
   align-items: center;
   gap: 10px;
-  width: 200px;
+  width: max-content;
+  font-size: 14px;
 }
 .option input[type="radio"] {
   display: none;
@@ -206,7 +213,6 @@ header .menu-bar li a {
   background: #444;
 }
 .description {
-  width: 50%;
   margin: 0 auto;
   color: #808080;
   padding-top: 10px;
@@ -214,7 +220,6 @@ header .menu-bar li a {
 .step-drop-down {
   display: flex;
   flex-direction: column;
-  width: 55%;
   justify-content: center;
   margin: 0 auto;
 }
@@ -222,4 +227,60 @@ header .menu-bar li a {
   height: 35px;
   padding: 0px 10px;
   border-radius: 5px;
+}
+fieldset {
+  border: medium none !important;
+  margin: 0 0 10px;
+  min-width: 100%;
+  padding: 0;
+  width: 100%;
+}
+fieldset label {
+  font-size: 10px;
+  margin: 0px;
+}
+fieldset input {
+  width: 100%;
+}
+fieldset textarea {
+  width: 100%;
+}
+#contact input[type="text"]:hover,
+#contact input[type="email"]:hover,
+#contact input[type="tel"]:hover,
+#contact input[type="url"]:hover,
+#contact textarea:hover {
+  -webkit-transition: border-color 0.3s ease-in-out;
+  -moz-transition: border-color 0.3s ease-in-out;
+  transition: border-color 0.3s ease-in-out;
+  border: 1px solid #aaa;
+}
+#contact textarea {
+  height: 100px;
+  max-width: 100%;
+  resize: none;
+}
+
+.flow-icon {
+  width: 1.5rem !important;
+  height: 1.5rem !important;
+}
+.flow-icon-grey {
+  color: #aaa;
+}
+.flow-icon-dark {
+  color: #1a1a1a;
+}
+.flow-icon path {
+  width: 1.5rem !important;
+  height: 1.5rem !important;
+}
+.back-icon {
+  position: absolute;
+  left: 20%;
+  top: 45%;
+  margin: auto;
+}
+.onboarding-pages-button {
+  padding-top: 70px;
 }
