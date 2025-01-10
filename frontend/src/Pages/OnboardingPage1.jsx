@@ -3,17 +3,28 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Paragraph from "../Components/before-onboarding/Paragraph";
 import StepFlow from "../Components/before-onboarding/StepFlow";
 import Button from "../Components/before-onboarding/Button";
-import { useOutletContext } from "react-router-dom";
+import { useNavigate, useOutletContext } from "react-router-dom";
 
 function OnboardingPage1() {
   const [paraType, setParaType] = useState(1);
   const { step, setStep, setPage } = useOutletContext();
+  const navigate = useNavigate();
 
   // updating step flow
   useEffect(() => {
     setStep(2);
     setPage("");
   }, [step]);
+
+  //handle submit button
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    navigate("/third-step");
+  };
+  //handle backward button
+  const handleBackward = () => {
+    navigate("/");
+  };
 
   const para1 = `Comments will be generated as a single, cohesive paragraph, like
             this one. Sleuther ensures each comment includes professional
@@ -36,7 +47,7 @@ function OnboardingPage1() {
       <div className="container">
         <StepFlow step={step} />
         <div>
-          <div className="back-icon">
+          <div className="back-icon" onClick={handleBackward}>
             <svg
               width="2.25rem"
               height="2.25rem"
@@ -126,7 +137,7 @@ function OnboardingPage1() {
                   {paraType === 3 && <Paragraph content={para3} />}
                 </div>
                 <div className="navigation onboarding-pages-button">
-                  <Button text={"Next"} />
+                  <Button handleSubmit={handleSubmit} text={"Next"} />
                 </div>
               </div>
             </div>

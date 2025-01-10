@@ -1,18 +1,28 @@
 import React, { useEffect, useState } from "react";
 import StepFlow from "../Components/before-onboarding/StepFlow";
 import Button from "../Components/before-onboarding/Button";
-import { useOutletContext } from "react-router-dom";
+import { useNavigate, useOutletContext } from "react-router-dom";
 import Paragraph from "../Components/before-onboarding/Paragraph";
 
 function OnboardingPage3() {
   const [paraType, setParaType] = useState(1);
   const { step, setStep, setPage } = useOutletContext();
-
+  const navigate = useNavigate();
   // updating step flow
   useEffect(() => {
     setStep(4);
     setPage("");
   }, [step]);
+
+  //handle submit button
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    navigate("/fifth-step");
+  };
+  //handle backward button
+  const handleBackward = () => {
+    navigate("/third-step");
+  };
 
   const para1 = `Show an example preview of
                                 conciseness that corresponds with the setting
@@ -30,7 +40,7 @@ function OnboardingPage3() {
         <div className="row justify-content-center">
           <div className="col-xl-7 col-lg-7 col-md-12 col-sm-12">
             <div>
-              <div className="back-icon">
+              <div className="back-icon" onClick={handleBackward}>
                 <svg
                   width="36"
                   height="36"
@@ -131,7 +141,7 @@ function OnboardingPage3() {
                   {paraType === 4 && <Paragraph content={para4} />}
                 </div>
                 <div className="navigation onboarding-pages-button">
-                  <Button text={"Next"} />
+                  <Button handleSubmit={handleSubmit} text={"Next"} />
                 </div>
               </div>
             </div>

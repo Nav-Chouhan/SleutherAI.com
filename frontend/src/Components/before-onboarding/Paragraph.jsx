@@ -1,7 +1,7 @@
 import React from "react";
 
 function Paragraph({ content }) {
-  return <div>{content}</div>;
+  return <div className="onboarding-paragraph">{content}</div>;
 }
 
 export default Paragraph;

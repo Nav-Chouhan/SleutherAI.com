@@ -1,16 +1,27 @@
 import React, { useEffect } from "react";
 import Button from "../Components/before-onboarding/Button";
 import StepFlow from "../Components/before-onboarding/StepFlow";
-import { useOutletContext } from "react-router-dom";
+import { useNavigate, useOutletContext } from "react-router-dom";
 
 function OnboardingPage4() {
   const { step, setStep, setPage } = useOutletContext();
+  const navigate = useNavigate();
 
   // updating step flow
   useEffect(() => {
     setStep(5);
     setPage("");
   }, [step]);
+
+  //handle submit button
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    navigate("/fifth-step");
+  };
+  //handle backward button
+  const handleBackward = () => {
+    navigate("/fourth-step");
+  };
 
   return (
     <section className="step-sec">
@@ -19,7 +30,7 @@ function OnboardingPage4() {
         <div className="row justify-content-center">
           <div className="col-xl-6 col-lg-6 col-md-12 col-sm-12">
             <div>
-              <div className="back-icon">
+              <div className="back-icon" onClick={handleBackward}>
                 <svg
                   width="2.25rem"
                   height="2.25rem"
@@ -100,7 +111,11 @@ function OnboardingPage4() {
                     </small>
                   </fieldset>
                   <div className="navigation onboarding-pages-button">
-                    <Button type="submit" text={"Start free trial"} />
+                    <Button
+                      type="submit"
+                      handleSubmit={handleSubmit}
+                      text={"Start free trial"}
+                    />
                   </div>
                 </form>
               </div>

@@ -1,10 +1,11 @@
 import React, { useEffect } from "react";
 import Button from "../Components/before-onboarding/Button";
 import StepFlow from "../Components/before-onboarding/StepFlow";
-import { useOutletContext } from "react-router-dom";
+import { useNavigate, useOutletContext } from "react-router-dom";
 
 function OnboardingPage2() {
   const { step, setStep, setPage } = useOutletContext();
+  const navigate = useNavigate();
 
   // updating step flow
   useEffect(() => {
@@ -12,12 +13,22 @@ function OnboardingPage2() {
     setPage("");
   }, [step]);
 
+  //handle submit button
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    navigate("/fourth-step");
+  };
+  //handle backward button
+  const handleBackward = () => {
+    navigate("/second-step");
+  };
+
   return (
     <section className="step-sec">
       <div className="container">
         <StepFlow step={step} />
         <div>
-          <div className="back-icon">
+          <div className="back-icon" onClick={handleBackward}>
             <svg
               width="2.25rem"
               height="2.25rem"
@@ -67,7 +78,7 @@ function OnboardingPage2() {
                     Example: "We recommend," or "I recommend."
                   </small>
                   <div className="navigation onboarding-pages-button">
-                    <Button text={"Next"} />
+                    <Button handleSubmit={handleSubmit} text={"Next"} />
                   </div>
                 </div>
               </div>

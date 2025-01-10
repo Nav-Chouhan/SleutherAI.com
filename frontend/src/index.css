@@ -4,7 +4,7 @@
 
 body {
   margin: 0px;
-  font-family: "Open Sans", serif;
+  font-family: Open Sans, serif;
 }
 header .logo-img svg {
   height: 40px;
@@ -18,6 +18,7 @@ header .menu-bar {
   column-gap: 20px;
   margin: 0px;
   justify-content: center;
+  align-items: center;
 }
 header .menu-bar li a {
   font-size: 14px;
@@ -165,6 +166,7 @@ header .menu-bar li a {
   display: flex;
 }
 .options {
+  width: max-content;
   display: flex;
   gap: 30px;
   justify-content: start;
@@ -189,9 +191,10 @@ header .menu-bar li a {
   border-radius: 100px;
 }
 .option input[type="radio"]:checked + label {
-  background-color: #b89f68;
-  color: #fff;
-  border-color: #b89f68;
+  background-color: rgba(235, 231, 231, 1);
+  color: #090606;
+  font-weight: bold;
+  border-color: rgba(235, 231, 231, 1);
   border-radius: 100px;
 }
 .navigation {
@@ -283,4 +286,31 @@ fieldset textarea {
 }
 .onboarding-pages-button {
   padding-top: 70px;
+}
+
+.onboarding-paragraph {
+  font-family: Open Sans;
+  font-size: 16px;
+  font-style: italic;
+  font-weight: 600;
+  line-height: 24.51px;
+  text-align: left;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+}
+header .menu-bar .account-icon {
+  font-size: 40px;
+  color: #c3c3c3;
+  transition: color 0.3s ease;
+}
+header .menu-bar .settings-icon {
+  font-size: 32px;
+  color: #c3c3c3;
+  transition: color 0.3s ease;
+}
+header .menu-bar .account-icon:hover {
+  color: #201d1d;
+}
+header .menu-bar .settings-icon:hover {
+  color: #201d1d;
 }

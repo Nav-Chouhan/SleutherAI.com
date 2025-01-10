@@ -1,6 +1,8 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Link } from "react-router-dom";
+import { MdAccountCircle } from "react-icons/md";
+import { IoIosSettings } from "react-icons/io";
 
 function Header({ page }) {
   return (
@@ -31,10 +33,26 @@ function Header({ page }) {
             <div className="col-xl-2 col-lg-2 col-md-12 col-sm-12">
               <ul className="menu-bar">
                 <li>
-                  <Link to="#">Pricing</Link>
+                  <Link to="/pricing">Pricing</Link>
                 </li>
                 <li>
-                  <Link to="#">Log in</Link>
+                  <Link to="/login">Log in</Link>
+                </li>
+              </ul>
+            </div>
+          )}
+          {page == "dashboard-pages" && (
+            <div className="col-xl-2 col-lg-2 col-md-12 col-sm-12">
+              <ul className="menu-bar">
+                <li>
+                  <Link className="settings-icon" to="#">
+                    <IoIosSettings />
+                  </Link>
+                </li>
+                <li>
+                  <Link className="account-icon" to="#">
+                    <MdAccountCircle />
+                  </Link>
                 </li>
               </ul>
             </div>

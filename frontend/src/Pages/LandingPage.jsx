@@ -2,15 +2,22 @@ import React, { useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import Button from "../Components/before-onboarding/Button";
-import { useOutletContext } from "react-router-dom";
+import { useNavigate, useOutletContext } from "react-router-dom";
 
 function LandingPage() {
   const { page, setPage } = useOutletContext();
+  const navigate = useNavigate();
 
   // updating step flow
   useEffect(() => {
     setPage("landing");
-  }, [page]);
+  }, []);
+
+  //handle submit button
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    navigate("/second-step");
+  };
   return (
     <section className="land-sec">
       <div className="container">
@@ -64,7 +71,7 @@ function LandingPage() {
             <div className="input-box">
               <input type="text" placeholder="HIABC Scope of Inspection" />
               <div className="navigation">
-                <Button text={"Try free"}></Button>
+                <Button handleSubmit={handleSubmit} text={"Try free"}></Button>
               </div>
             </div>
           </div>
