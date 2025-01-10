@@ -8,6 +8,7 @@ import OnboardingPage1 from "./Pages/OnboardingPage1";
 import OnboardingPage2 from "./Pages/OnboardingPage2";
 import OnboardingPage3 from "./Pages/OnboardingPage3";
 import OnboardingPage4 from "./Pages/OnboardingPage4";
+import HomePage from "./Pages/HomePage";
 
 function App() {
   let [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -20,6 +21,7 @@ function App() {
           <Route path="/third-step" element={<OnboardingPage2 />} />
           <Route path="/fourth-step" element={<OnboardingPage3 />} />
           <Route path="/fifth-step" element={<OnboardingPage4 />} />
+          <Route path="/homepage" element={<HomePage />} />
         </Route>
       </Routes>
     </Router>

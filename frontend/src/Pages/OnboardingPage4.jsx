@@ -16,7 +16,7 @@ function OnboardingPage4() {
   //handle submit button
   const handleSubmit = (e) => {
     e.preventDefault();
-    navigate("/fifth-step");
+    navigate("/homepage");
   };
   //handle backward button
   const handleBackward = () => {
