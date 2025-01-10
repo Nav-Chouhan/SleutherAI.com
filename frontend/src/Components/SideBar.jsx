@@ -1,19 +1,25 @@
 import React from "react";
-import { CgHomeAlt } from "react-icons/cg";
+import homeIcon from "../assets/images/home.svg";
+import { BsChatSquareDotsFill } from "react-icons/bs";
 
 function SideBar() {
   return (
     <div className="sidebar bg-dark text-light p-3">
-      <ul className="list-unstyled">
-        <li className="mb-3">
+      <ul className="list-unstyled d-flex flex-column gap-4 pt-3">
+        <li className="">
           <a href="#" className="text-light text-decoration-none">
-            <i className="fas fa-home me-2"></i>
+            <img
+              className=""
+              style={{ width: "25px", height: "25px" }}
+              src={homeIcon}
+              alt=""
+            />
             Home
           </a>
         </li>
-        <li className="mb-3">
+        <li className="">
           <a href="#" className="text-light text-decoration-none">
-            <i className="fas fa-comments me-2"></i>
+            <BsChatSquareDotsFill style={{ width: "25px", height: "25px" }} />
             Comments
           </a>
         </li>

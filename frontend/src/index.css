@@ -325,6 +325,8 @@ header .menu-bar .settings-icon:hover {
 .home-page-main .sidebar ul li a {
   display: flex;
   flex-direction: column;
+  gap: 6px;
+  align-items: center;
 }
 .home-page-main .chat-show {
   width: 200px;
@@ -368,5 +370,5 @@ header .menu-bar .settings-icon:hover {
 }
 .home-page-main .bottom-text {
   column-gap: 60px;
-  padding-top: 10px;
+  padding-top: 5px;
 }

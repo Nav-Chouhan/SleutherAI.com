@@ -1,9 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import SideBar from "../Components/SideBar";
 import PastChats from "../Components/PastChats";
 import SleutherLogo from "../assets/images/Frame (4).svg";
+import { useOutletContext } from "react-router-dom";
 
-function HomePage() {
+function HomePage({}) {
+  const { setPage } = useOutletContext();
+  useEffect(() => {
+    setPage("dashboard-pages");
+  }, []);
   return (
     <section className="land-sec home-page-main">
       <div className="container-fluid p-0">
@@ -19,15 +24,15 @@ function HomePage() {
                     <img
                       src={SleutherLogo}
                       alt="Sleuther Logo"
-                      className="img-fluid"
-                      style={{ maxWidth: "80px" }}
+                      className="img-fluid w-auto"
+                      // style={{ maxWidth: "80px" }}
                     />
                   </div>
                   <h3>Welcome, [User Name]</h3>
                   <p>
                     Start creating professional inspection comments instantly.
                   </p>
-                  <div className="w-75 m-auto">
+                  <div className="m-auto">
                     <div className="input-box-text">
                       <div className="lable-text text-center m-auto">
                         Simply type the issue, the location, and let Sleuther
@@ -42,15 +47,24 @@ function HomePage() {
                       <div className="input-btn">
                         <a href="#">GENERATE</a>
                       </div>
-                    </div>
-                    <div className="bottom-text d-flex">
-                      <p className="tip-text">
-                        <span>Pro Tip:</span> The more you share, the sharper
-                        the details Sleuther adds.
-                      </p>
-                      <p className="tip-text">
-                        <a href="#">More pro tips</a>
-                      </p>
+                      <div className="bottom-text d-flex">
+                        <p
+                          className="tip-text"
+                          style={{
+                            paddingLeft: "8px",
+                            paddingTop: "0px",
+                            fontSize: "12px",
+                            lineHeight: "16.34px",
+                            textAlign: "left",
+                          }}
+                        >
+                          <span>Pro Tip:</span> The more you share, the sharper
+                          the details Sleuther adds.
+                        </p>
+                        <p className="tip-text">
+                          <a href="#">More pro tips</a>
+                        </p>
+                      </div>
                     </div>
                   </div>
                 </div>
