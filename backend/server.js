@@ -16,7 +16,7 @@ databaseConnection();
 app.use(cors());
 app.use(bodyParser.json());
 
-app.use('/api/v1', indexRoutes);
+app.use('/api', indexRoutes);
 
 app.listen(PORT, () => {
   console.log(`Successfully connected to PORT ${PORT}`);

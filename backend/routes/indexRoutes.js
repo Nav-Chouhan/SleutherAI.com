@@ -1,15 +1,15 @@
 const express = require('express');
 
 const userRoutes = require('./userRoutes');
-// const todoRoutes = require('./todoRoutes');
 
 const authMiddleware = require('../middlewares/authMiddleware');
 
 const router = express.Router();
 
 // Centralizing all the routes in one file
-// router.use('/admin', userRoutes);
-router.use('/user', userRoutes);
-// router.use('/:userId/todo', authMiddleware, todoRoutes);
+router.use(
+  '/user',
+  userRoutes,
+);
 
 module.exports = router;

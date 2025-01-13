@@ -4,8 +4,8 @@ const User = require('../models/user');
 
 const authMiddleware = async (req, res, next) => {
   try {
-    const accessToken = req.headers.authorization;
     const { userId } = req.params;
+    const accessToken = req.headers.authorization;
 
     const user = await User.findById(userId);
     if (!user) {
