@@ -6,8 +6,7 @@ import Button from "../Components/before-onboarding/Button";
 import { useNavigate, useOutletContext } from "react-router-dom";
 
 function OnboardingPage1() {
-  const [paraType, setParaType] = useState(1);
-  const { step, setStep, setPage } = useOutletContext();
+  const { step, setStep, setPage, paraType, setParaType } = useOutletContext();
   const navigate = useNavigate();
 
   // updating step flow
@@ -87,28 +86,36 @@ function OnboardingPage1() {
                 <h2>Choose comment format</h2>
                 <div className="options">
                   <div
-                    className={`option ${paraType === 1 && "selectedOption"}`}
-                    onClick={() => setParaType(1)}
+                    className={`option ${
+                      paraType === "Paragraph" && "selectedOption"
+                    }`}
+                    onClick={() => {
+                      setParaType("Paragraph");
+                    }}
                   >
                     <input
                       type="radio"
                       id="paragraph"
                       name="format"
-                      checked={paraType === 1}
+                      checked={paraType === "Paragraph"}
                       readOnly
                     />
                     <label htmlFor="paragraph">Paragraph</label>
                   </div>
 
                   <div
-                    className={`option ${paraType === 2 && "selectedOption"}`}
-                    onClick={() => setParaType(2)}
+                    className={`option ${
+                      paraType === "Paragraph with titles" && "selectedOption"
+                    }`}
+                    onClick={() => {
+                      setParaType("Paragraph with titles");
+                    }}
                   >
                     <input
                       type="radio"
                       id="paragraph-titles"
                       name="format"
-                      checked={paraType === 2}
+                      checked={paraType === "Paragraph with titles"}
                       readOnly
                     />
                     <label htmlFor="paragraph-titles">
@@ -117,14 +124,18 @@ function OnboardingPage1() {
                   </div>
 
                   <div
-                    className={`option ${paraType === 3 && "selectedOption"}`}
-                    onClick={() => setParaType(3)}
+                    className={`option ${
+                      paraType === "Titled line-by-line" && "selectedOption"
+                    }`}
+                    onClick={() => {
+                      setParaType("Titled line-by-line");
+                    }}
                   >
                     <input
                       type="radio"
                       id="line-by-line"
                       name="format"
-                      checked={paraType === 3}
+                      checked={paraType === "Titled line-by-line"}
                       readOnly
                     />
                     <label htmlFor="line-by-line">Titled line-by-line</label>
@@ -132,9 +143,13 @@ function OnboardingPage1() {
                 </div>
 
                 <div className="description">
-                  {paraType === 1 && <Paragraph content={para1} />}
-                  {paraType === 2 && <Paragraph content={para2} />}
-                  {paraType === 3 && <Paragraph content={para3} />}
+                  {paraType === "Paragraph" && <Paragraph content={para1} />}
+                  {paraType === "Paragraph with titles" && (
+                    <Paragraph content={para2} />
+                  )}
+                  {paraType === "Titled line-by-line" && (
+                    <Paragraph content={para3} />
+                  )}
                 </div>
                 <div className="navigation onboarding-pages-button">
                   <Button handleSubmit={handleSubmit} text={"Next"} />

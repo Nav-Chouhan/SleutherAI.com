@@ -1,24 +1,31 @@
 import React, { useEffect } from "react";
+import { useNavigate, useOutletContext } from "react-router-dom";
 import Button from "../Components/before-onboarding/Button";
 import StepFlow from "../Components/before-onboarding/StepFlow";
-import { useNavigate, useOutletContext } from "react-router-dom";
+import PasswordInput from "../Components/PasswordInput";
 
 function OnboardingPage4() {
-  const { step, setStep, setPage } = useOutletContext();
+  const {
+    step,
+    setStep,
+    setPage,
+    setFirstName,
+    setLastName,
+    setEmail,
+    password,
+    setPassword,
+    confirmPassword,
+    setConfirmPassword,
+    handleSignUp,
+  } = useOutletContext();
+
   const navigate = useNavigate();
 
-  // updating step flow
   useEffect(() => {
     setStep(5);
     setPage("");
-  }, [step]);
+  }, [setStep, setPage]);
 
-  //handle submit button
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    navigate("/homepage");
-  };
-  //handle backward button
   const handleBackward = () => {
     navigate("/fourth-step");
   };
@@ -76,6 +83,7 @@ function OnboardingPage4() {
                       tabIndex="1"
                       required
                       autoFocus
+                      onChange={(e) => setFirstName(e.target.value)}
                     />
                   </fieldset>
                   <fieldset className="form-group">
@@ -85,6 +93,7 @@ function OnboardingPage4() {
                       className="form-control"
                       tabIndex="1"
                       required
+                      onChange={(e) => setLastName(e.target.value)}
                     />
                   </fieldset>
                   <fieldset className="form-group">
@@ -94,26 +103,37 @@ function OnboardingPage4() {
                       className="form-control"
                       tabIndex="2"
                       required
+                      onChange={(e) => setEmail(e.target.value)}
+                    />
+                  </fieldset>
+                  <fieldset className="form-group">
+                    <label style={{ fontSize: "0.75rem" }}>Password</label>
+                    <PasswordInput
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      placeholder=""
                     />
                   </fieldset>
                   <fieldset className="form-group">
                     <label style={{ fontSize: "0.75rem" }}>
                       Confirm password
                     </label>
-                    <input
-                      type="password"
-                      className="form-control"
-                      tabIndex="4"
-                      required
+                    <PasswordInput
+                      value={confirmPassword}
+                      onChange={(e) => setConfirmPassword(e.target.value)}
+                      placeholder=""
                     />
-                    <small className="form-text text-muted">
-                      Your information is never shared
-                    </small>
                   </fieldset>
+                  <small className="form-text text-muted">
+                    Your information is never shared
+                  </small>
                   <div className="navigation onboarding-pages-button">
                     <Button
+                      handleSubmit={(e) => {
+                        e.preventDefault();
+                        handleSignUp();
+                      }}
                       type="submit"
-                      handleSubmit={handleSubmit}
                       text={"Start free trial"}
                     />
                   </div>

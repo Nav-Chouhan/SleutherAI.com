@@ -12,7 +12,7 @@ function Button({ text, type = "button", handleSubmit }) {
           handleSubmit(e);
         }}
       >
-        {text} <FaArrowRightLong />
+        {text} {text != "Update" && <FaArrowRightLong />}
       </button>
     </div>
   );

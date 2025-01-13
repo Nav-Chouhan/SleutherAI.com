@@ -5,7 +5,7 @@ import Button from "../Components/before-onboarding/Button";
 import { useNavigate, useOutletContext } from "react-router-dom";
 
 function LandingPage() {
-  const { page, setPage } = useOutletContext();
+  const { page, setPage, setSopInput } = useOutletContext();
   const navigate = useNavigate();
 
   // updating step flow
@@ -14,8 +14,7 @@ function LandingPage() {
   }, []);
 
   //handle submit button
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = () => {
     navigate("/second-step");
   };
   return (
@@ -69,7 +68,13 @@ function LandingPage() {
               <div className="lable-text-1">No credit card required</div>
             </div>
             <div className="input-box">
-              <input type="text" placeholder="HIABC Scope of Inspection" />
+              <input
+                type="text"
+                placeholder="HIABC Scope of Inspection"
+                onChange={(e) => {
+                  setSopInput(e.target.value);
+                }}
+              />
               <div className="navigation">
                 <Button handleSubmit={handleSubmit} text={"Try free"}></Button>
               </div>

@@ -4,7 +4,7 @@ import StepFlow from "../Components/before-onboarding/StepFlow";
 import { useNavigate, useOutletContext } from "react-router-dom";
 
 function OnboardingPage2() {
-  const { step, setStep, setPage } = useOutletContext();
+  const { step, setStep, setPage, setInspectorType } = useOutletContext();
   const navigate = useNavigate();
 
   // updating step flow
@@ -71,8 +71,12 @@ function OnboardingPage2() {
                     Refer to the inspector as
                   </label>
                   <select className="form-select" id="personalizationSelect">
-                    <option value="We">"We"</option>
-                    <option value="I">"I"</option>
+                    <option value="We" onClick={() => setInspectorType("We")}>
+                      "We"
+                    </option>
+                    <option value="I" onClick={() => setInspectorType("I")}>
+                      "I"
+                    </option>
                   </select>
                   <small className="text-muted">
                     Example: "We recommend," or "I recommend."

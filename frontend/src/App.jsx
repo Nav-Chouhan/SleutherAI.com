@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import ReactDOM from "react-dom/client";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { BrowserRouter as Router, Routes, Route } from "react-router";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router";
 import Layout from "./Components/Layout";
 import LandingPage from "./Pages/LandingPage";
 import OnboardingPage1 from "./Pages/OnboardingPage1";
@@ -9,9 +9,20 @@ import OnboardingPage2 from "./Pages/OnboardingPage2";
 import OnboardingPage3 from "./Pages/OnboardingPage3";
 import OnboardingPage4 from "./Pages/OnboardingPage4";
 import HomePage from "./Pages/HomePage";
+import Login from "./Pages/Login";
+import ForgetPassword from "./Pages/ForgetPassword";
+
+const isAuthenticated = () => {
+  // Replace with your logic to check authentication
+  return true;
+  // return localStorage.getItem("authToken") !== null;
+};
+
+const ProtectedRoute = ({ children }) => {
+  return isAuthenticated() ? children : <Navigate to="/login" />;
+};
 
 function App() {
-  let [isLoggedIn, setIsLoggedIn] = useState(false);
   return (
     <Router>
       <Routes>
@@ -21,7 +32,25 @@ function App() {
           <Route path="/third-step" element={<OnboardingPage2 />} />
           <Route path="/fourth-step" element={<OnboardingPage3 />} />
           <Route path="/fifth-step" element={<OnboardingPage4 />} />
-          <Route path="/homepage" element={<HomePage />} />
+          <Route path="/login" element={<Login />} />
+
+          {/* Protected Routes */}
+          <Route
+            path="/homepage"
+            element={
+              <ProtectedRoute>
+                <HomePage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/forgot-password"
+            element={
+              <ProtectedRoute>
+                <ForgetPassword />
+              </ProtectedRoute>
+            }
+          />
         </Route>
       </Routes>
     </Router>
