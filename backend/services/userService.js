@@ -1,14 +1,24 @@
 const User = require('../models/user');
 
 const { validateUser } = require('../validations/userValidation');
-const { getHashedPassword, comparePassword, getAccessToken, verifyAccessToken } = require('../utils/helpers');
+
+const {
+  getHashedPassword,
+  comparePassword,
+  getAccessToken,
+} = require('../utils/helpers');
 
 const registerUser = async (userData) => {
   try {
     const {
-      name,
+      sop,
+      format,
+      reference,
+      conciseness,
+      firstName,
+      lastName,
       email,
-      password
+      password,
     } = userData;
 
     const userDataValidation = validateUser(userData);
@@ -27,16 +37,30 @@ const registerUser = async (userData) => {
 
     const hashedPassword = await getHashedPassword(password);
     const newUser = new User({
-      name,
+      sop,
+      format,
+      reference,
+      conciseness,
+      firstName,
+      lastName,
       email,
       password: hashedPassword,
+      numberOfTokensLeft: 50,
     });
     await newUser.save();
 
+    const accessToken = getAccessToken(newUser);
     return {
       id: newUser._id,
-      name: newUser.name,
+      accessToken,
+      sop: newUser.sop,
+      format: newUser.format,
+      reference: newUser.reference,
+      conciseness: newUser.conciseness,
+      firstName: newUser.firstName,
+      lastName: newUser.lastName,
       email: newUser.email,
+      numberOfTokensLeft: newUser.numberOfTokensLeft,
     };
   } catch (error) {
     return {
@@ -52,10 +76,12 @@ const loginUser = async (userData) => {
       password
     } = userData;
 
-    const userDataValidation = validateUser(userData);
-    if (userDataValidation?.error) {
+    if (
+      !email
+      || !password
+    ) {
       return {
-        error: `Error: ${userDataValidation.error}`,
+        error: 'Please fill all the required fields',
       };
     }
 
