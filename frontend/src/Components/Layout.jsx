@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Header from "./Header";
 import { Outlet, useNavigate } from "react-router-dom";
 import axiosInstance from "../utils/axiosInstance";
+import { useAuth } from "../context/AuthContext";
 
 function Layout() {
   const navigate = useNavigate();
@@ -17,6 +18,7 @@ function Layout() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const { setAuthState } = useAuth(); //auth state from context
 
   // Handle signup function
   const handleSignUp = async () => {
@@ -31,18 +33,6 @@ function Layout() {
         return;
       }
 
-      // console.log(
-      //   sopInput,
-      //   paraType,
-      //   inspectorType,
-      //   conciseness,
-      //   firstName,
-      //   lastName,
-      //   email,
-      //   password,
-      //   confirmPassword
-      // );
-
       const response = await axiosInstance.post("/api/user", {
         sop: sopInput,
         format: paraType,
@@ -55,24 +45,24 @@ function Layout() {
         confirmPassword,
       });
 
-      if (!response || response.data.error) {
-        console.log(response?.data?.error || "An error occurred.");
+      if (response.data?.error) {
+        console.error(response.data.error);
         return;
       }
 
-      if (response.data.accessToken) {
-        console.log("Registered successfully", response.data);
+      if (response.data.user.accessToken) {
+        localStorage.setItem("authToken", response.data.user.accessToken);
+        setAuthState({
+          isAuthenticated: true,
+          token: response.data.accessToken,
+          user: response.data.user,
+        });
         navigate("/homepage");
       }
     } catch (error) {
-      console.error("An error occurred during sign-up:", error);
-      if (
-        error.response &&
-        error.response.data &&
-        error.response.data.message
-      ) {
-        console.log(error.response.data.message);
-      }
+      const errorMessage =
+        error.response?.data?.message || "An unexpected error occurred.";
+      console.error(errorMessage);
     }
   };
 

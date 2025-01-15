@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import ReactDOM from "react-dom/client";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router";
 import Layout from "./Components/Layout";
@@ -11,15 +10,12 @@ import OnboardingPage4 from "./Pages/OnboardingPage4";
 import HomePage from "./Pages/HomePage";
 import Login from "./Pages/Login";
 import ForgetPassword from "./Pages/ForgetPassword";
-
-const isAuthenticated = () => {
-  // Replace with your logic to check authentication
-  return true;
-  // return localStorage.getItem("authToken") !== null;
-};
+import { useAuth } from "./context/AuthContext";
 
 const ProtectedRoute = ({ children }) => {
-  return isAuthenticated() ? children : <Navigate to="/login" />;
+  const { authState } = useAuth();
+
+  return authState.isAuthenticated ? children : <Navigate to="/login" />;
 };
 
 function App() {

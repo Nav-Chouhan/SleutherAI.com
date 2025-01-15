@@ -70,13 +70,13 @@ function OnboardingPage2() {
                   <label htmlFor="personalizationSelect" className="form-label">
                     Refer to the inspector as
                   </label>
-                  <select className="form-select" id="personalizationSelect">
-                    <option value="We" onClick={() => setInspectorType("We")}>
-                      "We"
-                    </option>
-                    <option value="I" onClick={() => setInspectorType("I")}>
-                      "I"
-                    </option>
+                  <select
+                    onChange={(e) => setInspectorType(e.target.value)}
+                    className="form-select"
+                    id="personalizationSelect"
+                  >
+                    <option value="We">"We"</option>
+                    <option value="I">"I"</option>
                   </select>
                   <small className="text-muted">
                     Example: "We recommend," or "I recommend."
