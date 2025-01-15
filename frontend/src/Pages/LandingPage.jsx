@@ -5,7 +5,7 @@ import Button from "../Components/before-onboarding/Button";
 import { useNavigate, useOutletContext } from "react-router-dom";
 
 function LandingPage() {
-  const { page, setPage, setSopInput } = useOutletContext();
+  const { setPage, setSopInput } = useOutletContext();
   const navigate = useNavigate();
 
   // updating step flow

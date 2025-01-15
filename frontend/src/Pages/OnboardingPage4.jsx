@@ -1,23 +1,19 @@
 import React, { useEffect } from "react";
 import { useNavigate, useOutletContext } from "react-router-dom";
-import Button from "../Components/before-onboarding/Button";
 import StepFlow from "../Components/before-onboarding/StepFlow";
 import PasswordInput from "../Components/PasswordInput";
+import { useForm } from "react-hook-form";
+import { FaArrowRightLong } from "react-icons/fa6";
 
 function OnboardingPage4() {
+  const { step, setStep, setPage, handleSignUp } = useOutletContext();
+
   const {
-    step,
-    setStep,
-    setPage,
-    setFirstName,
-    setLastName,
-    setEmail,
-    password,
-    setPassword,
-    confirmPassword,
-    setConfirmPassword,
-    handleSignUp,
-  } = useOutletContext();
+    register,
+    handleSubmit,
+    formState: { errors },
+    watch,
+  } = useForm();
 
   const navigate = useNavigate();
 
@@ -28,6 +24,11 @@ function OnboardingPage4() {
 
   const handleBackward = () => {
     navigate("/fourth-step");
+  };
+
+  //handle signup
+  const onSubmit = (data) => {
+    handleSignUp(data);
   };
 
   return (
@@ -74,17 +75,22 @@ function OnboardingPage4() {
               <div className="content">
                 <h2>Account details</h2>
 
-                <form>
+                <form onSubmit={handleSubmit(onSubmit)}>
                   <fieldset className="form-group">
                     <label style={{ fontSize: "0.75rem" }}>First name</label>
                     <input
                       type="text"
                       className="form-control"
                       tabIndex="1"
-                      required
-                      autoFocus
-                      onChange={(e) => setFirstName(e.target.value)}
+                      {...register("firstName", {
+                        required: "First name is required",
+                      })}
                     />
+                    {errors.firstName && (
+                      <small className="text-danger">
+                        {errors.firstName.message}
+                      </small>
+                    )}
                   </fieldset>
                   <fieldset className="form-group">
                     <label style={{ fontSize: "0.75rem" }}>Last name</label>
@@ -92,9 +98,15 @@ function OnboardingPage4() {
                       type="text"
                       className="form-control"
                       tabIndex="1"
-                      required
-                      onChange={(e) => setLastName(e.target.value)}
+                      {...register("lastName", {
+                        required: "Last name is required",
+                      })}
                     />
+                    {errors.lastName && (
+                      <small className="text-danger">
+                        {errors.lastName.message}
+                      </small>
+                    )}
                   </fieldset>
                   <fieldset className="form-group">
                     <label style={{ fontSize: "0.75rem" }}>Email</label>
@@ -102,40 +114,66 @@ function OnboardingPage4() {
                       type="email"
                       className="form-control"
                       tabIndex="2"
-                      required
-                      onChange={(e) => setEmail(e.target.value)}
+                      {...register("email", {
+                        required: "Email is required",
+                        pattern: {
+                          value: /^\S+@\S+\.\S+$/,
+                          message: "Invalid email address",
+                        },
+                      })}
                     />
+                    {errors.email && (
+                      <small className="text-danger">
+                        {errors.email.message}
+                      </small>
+                    )}
                   </fieldset>
                   <fieldset className="form-group">
                     <label style={{ fontSize: "0.75rem" }}>Password</label>
                     <PasswordInput
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                      placeholder=""
+                      {...register("password", {
+                        required: "Password is required",
+                        minLength: {
+                          value: 6,
+                          message: "Password must be at least 6 characters",
+                        },
+                      })}
+                      placeholder="Enter password"
                     />
+                    {errors.password && (
+                      <small className="text-danger">
+                        {errors.password.message}
+                      </small>
+                    )}
                   </fieldset>
                   <fieldset className="form-group">
                     <label style={{ fontSize: "0.75rem" }}>
                       Confirm password
                     </label>
                     <PasswordInput
-                      value={confirmPassword}
-                      onChange={(e) => setConfirmPassword(e.target.value)}
-                      placeholder=""
+                      {...register("confirmPassword", {
+                        required: "Confirm password is required",
+                        validate: (value) =>
+                          value === watch("password") ||
+                          "Passwords do not match",
+                      })}
+                      placeholder="Confirm password"
                     />
+                    {errors.confirmPassword && (
+                      <small className="text-danger">
+                        {errors.confirmPassword.message}
+                      </small>
+                    )}
                   </fieldset>
                   <small className="form-text text-muted">
                     Your information is never shared
                   </small>
                   <div className="navigation onboarding-pages-button">
-                    <Button
-                      handleSubmit={(e) => {
-                        e.preventDefault();
-                        handleSignUp();
-                      }}
-                      type="submit"
-                      text={"Start free trial"}
-                    />
+                    <div className="input-btn ">
+                      <button type="submit" className="gap-2">
+                        Start free trial <FaArrowRightLong />
+                      </button>
+                    </div>
                   </div>
                 </form>
               </div>

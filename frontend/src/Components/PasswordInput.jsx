@@ -1,24 +1,24 @@
-import React, { useState } from "react";
+import React, { useState, forwardRef } from "react";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 
-function PasswordInput({ value, onChange, placeholder }) {
+const PasswordInput = forwardRef((props, ref) => {
   const [isShowPassword, setIsShowPassword] = useState(false);
 
   const toggleShowPassword = () => {
-    setIsShowPassword(!isShowPassword);
+    setIsShowPassword((prevState) => !prevState);
   };
 
   return (
     <div
-      className="form-control d-flex align-items-center password-input-container input-group "
-      style={{ paddingLeft: "0px", paddingTop: "0px", paddingBottom: "0px" }}
+      className="form-control d-flex align-items-center password-input-container input-group"
+      style={{ paddingLeft: "0", paddingTop: "0", paddingBottom: "0" }}
     >
       <input
-        value={value}
-        onChange={onChange}
+        ref={ref}
         type={isShowPassword ? "text" : "password"}
-        placeholder={placeholder}
-        className="form-control border-0 bg-transparent  "
+        placeholder={props.placeholder}
+        className="form-control border-0 bg-transparent"
+        {...props}
       />
       {isShowPassword ? (
         <FaRegEye
@@ -35,5 +35,6 @@ function PasswordInput({ value, onChange, placeholder }) {
       )}
     </div>
   );
-}
+});
+
 export default PasswordInput;

@@ -13,15 +13,11 @@ function Layout() {
   const [paraType, setParaType] = useState("Paragraph");
   const [inspectorType, setInspectorType] = useState("We");
   const [conciseness, setConciseness] = useState("Very concise");
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
   const { setAuthState } = useAuth(); //auth state from context
 
   // Handle signup function
-  const handleSignUp = async () => {
+  const handleSignUp = async (formData) => {
+    const { firstName, lastName, email, password, confirmPassword } = formData;
     try {
       if (!firstName || !lastName || !password || !email) {
         console.log("Please provide all required fields.");
@@ -33,7 +29,7 @@ function Layout() {
         return;
       }
 
-      const response = await axiosInstance.post("/api/user", {
+      const payload = {
         sop: sopInput,
         format: paraType,
         reference: inspectorType,
@@ -43,26 +39,72 @@ function Layout() {
         email,
         password,
         confirmPassword,
-      });
+      };
+
+      const response = await axiosInstance.post("/api/user", payload);
 
       if (response.data?.error) {
-        console.error(response.data.error);
+        console.error("API Error:", response.data.error);
         return;
       }
 
-      if (response.data.user.accessToken) {
+      if (response.data.user?.accessToken) {
         localStorage.setItem("authToken", response.data.user.accessToken);
         setAuthState({
           isAuthenticated: true,
-          token: response.data.accessToken,
+          token: response.data.user.accessToken,
           user: response.data.user,
         });
         navigate("/homepage");
+      } else {
+        console.error("No access token received.");
       }
     } catch (error) {
       const errorMessage =
         error.response?.data?.message || "An unexpected error occurred.";
-      console.error(errorMessage);
+      console.error("Error in handleSignUp:", errorMessage);
+    }
+  };
+
+  // Handle login function
+  const handleLogin = async (formData) => {
+    const { email, password } = formData;
+    try {
+      if (!password || !email) {
+        console.log("Please provide all required fields.");
+        return;
+      }
+
+      const payload = {
+        email,
+        password,
+      };
+
+      const response = await axiosInstance.post(
+        "/api/user/access-token",
+        payload
+      );
+
+      if (response.data?.error) {
+        console.error("API Error:", response.data.error);
+        return;
+      }
+
+      if (response.data.user?.accessToken) {
+        localStorage.setItem("authToken", response.data.user.accessToken);
+        setAuthState({
+          isAuthenticated: true,
+          token: response.data.user.accessToken,
+          user: response.data.user,
+        });
+        navigate("/homepage");
+      } else {
+        console.error("No access token received.");
+      }
+    } catch (error) {
+      const errorMessage =
+        error.response?.data?.message || "An unexpected error occurred.";
+      console.error("Error in handleSignUp:", errorMessage);
     }
   };
 
@@ -82,17 +124,8 @@ function Layout() {
             setInspectorType,
             conciseness,
             setConciseness,
-            firstName,
-            setFirstName,
-            lastName,
-            setLastName,
-            email,
-            setEmail,
-            password,
-            setPassword,
-            confirmPassword,
-            setConfirmPassword,
             handleSignUp,
+            handleLogin,
           }}
         />
       </main>
