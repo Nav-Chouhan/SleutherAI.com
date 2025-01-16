@@ -13,6 +13,7 @@ function Layout() {
   const [paraType, setParaType] = useState("Paragraph");
   const [inspectorType, setInspectorType] = useState("We");
   const [conciseness, setConciseness] = useState("Very concise");
+  const [promptInput, setPromptInput] = useState("");
   const { setAuthState } = useAuth(); //auth state from context
 
   // Handle signup function
@@ -126,6 +127,8 @@ function Layout() {
             setConciseness,
             handleSignUp,
             handleLogin,
+            promptInput,
+            setPromptInput,
           }}
         />
       </main>
