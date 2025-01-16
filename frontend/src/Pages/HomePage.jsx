@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import SideBar from "../Components/SideBar";
-import PastChats from "../Components/PastChats";
 import SleutherLogo from "../assets/images/Frame (4).svg";
 import { useOutletContext } from "react-router-dom";
+import ChatHistory from "../Components/ChatHistory";
 
 function HomePage({}) {
   const { setPage } = useOutletContext();
@@ -16,7 +16,7 @@ function HomePage({}) {
           <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 p-0">
             <div className="d-flex">
               <SideBar />
-              <PastChats />
+              <ChatHistory />
 
               <div className="main-content flex-grow-1 p-4">
                 <div className="text-center">
@@ -25,7 +25,6 @@ function HomePage({}) {
                       src={SleutherLogo}
                       alt="Sleuther Logo"
                       className="img-fluid w-auto"
-                      // style={{ maxWidth: "80px" }}
                     />
                   </div>
                   <h3>Welcome, [User Name]</h3>

@@ -4,7 +4,7 @@ import StepFlow from "../Components/before-onboarding/StepFlow";
 import { useNavigate, useOutletContext } from "react-router-dom";
 
 function OnboardingPage2() {
-  const { step, setStep, setPage } = useOutletContext();
+  const { step, setStep, setPage, setInspectorType } = useOutletContext();
   const navigate = useNavigate();
 
   // updating step flow
@@ -70,7 +70,11 @@ function OnboardingPage2() {
                   <label htmlFor="personalizationSelect" className="form-label">
                     Refer to the inspector as
                   </label>
-                  <select className="form-select" id="personalizationSelect">
+                  <select
+                    onChange={(e) => setInspectorType(e.target.value)}
+                    className="form-select"
+                    id="personalizationSelect"
+                  >
                     <option value="We">"We"</option>
                     <option value="I">"I"</option>
                   </select>

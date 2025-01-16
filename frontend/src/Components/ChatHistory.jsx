@@ -1,7 +1,7 @@
 import React from "react";
 import editIcon from "../assets/images/edit.svg";
 
-function PastChats() {
+function ChatHistory() {
   return (
     <div className="chat-show">
       <div className="new-chat-icon text-right pr-4 pt-4">
@@ -14,4 +14,4 @@ function PastChats() {
   );
 }
 
-export default PastChats;
+export default ChatHistory;

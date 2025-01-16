@@ -5,8 +5,8 @@ import { useNavigate, useOutletContext } from "react-router-dom";
 import Paragraph from "../Components/before-onboarding/Paragraph";
 
 function OnboardingPage3() {
-  const [paraType, setParaType] = useState(1);
-  const { step, setStep, setPage } = useOutletContext();
+  const { step, setStep, setPage, conciseness, setConciseness } =
+    useOutletContext();
   const navigate = useNavigate();
   // updating step flow
   useEffect(() => {
@@ -78,56 +78,64 @@ function OnboardingPage3() {
                 <h2>Conciseness</h2>
                 <div className="options">
                   <div
-                    className={`option ${paraType === 1 && "selectedOption"}`}
-                    onClick={() => setParaType(1)}
+                    className={`option ${
+                      conciseness === "Very concise" && "selectedOption"
+                    }`}
+                    onClick={() => setConciseness("Very concise")}
                   >
                     <input
                       type="radio"
                       id="paragraph"
                       name="format"
-                      checked={paraType === 1}
+                      checked={conciseness === "Very concise"}
                       readOnly
                     />
                     <label htmlFor="very">Very concise</label>
                   </div>
 
                   <div
-                    className={`option ${paraType === 2 && "selectedOption"}`}
-                    onClick={() => setParaType(2)}
+                    className={`option ${
+                      conciseness === "Concise" && "selectedOption"
+                    }`}
+                    onClick={() => setConciseness("Concise")}
                   >
                     <input
                       type="radio"
                       id="paragraph"
                       name="format"
-                      checked={paraType === 2}
+                      checked={conciseness === "Concise"}
                       readOnly
                     />
                     <label htmlFor="very">Concise</label>
                   </div>
 
                   <div
-                    className={`option ${paraType === 3 && "selectedOption"}`}
-                    onClick={() => setParaType(3)}
+                    className={`option ${
+                      conciseness === "Concise but detailed" && "selectedOption"
+                    }`}
+                    onClick={() => setConciseness("Concise but detailed")}
                   >
                     <input
                       type="radio"
                       id="paragraph"
                       name="format"
-                      checked={paraType === 3}
+                      checked={conciseness === "Concise but detailed"}
                       readOnly
                     />
                     <label htmlFor="very">Concise but detailed</label>
                   </div>
 
                   <div
-                    className={`option ${paraType === 4 && "selectedOption"}`}
-                    onClick={() => setParaType(4)}
+                    className={`option ${
+                      conciseness === "Detailed" && "selectedOption"
+                    }`}
+                    onClick={() => setConciseness("Detailed")}
                   >
                     <input
                       type="radio"
                       id="paragraph"
                       name="format"
-                      checked={paraType === 4}
+                      checked={conciseness === "Detailed"}
                       readOnly
                     />
                     <label htmlFor="very">Detailed</label>
@@ -135,10 +143,14 @@ function OnboardingPage3() {
                 </div>
 
                 <div className="description">
-                  {paraType === 1 && <Paragraph content={para1} />}
-                  {paraType === 2 && <Paragraph content={para2} />}
-                  {paraType === 3 && <Paragraph content={para3} />}
-                  {paraType === 4 && <Paragraph content={para4} />}
+                  {conciseness === "Very concise" && (
+                    <Paragraph content={para1} />
+                  )}
+                  {conciseness === "Concise" && <Paragraph content={para2} />}
+                  {conciseness === "Concise but detailed" && (
+                    <Paragraph content={para3} />
+                  )}
+                  {conciseness === "Detailed" && <Paragraph content={para4} />}
                 </div>
                 <div className="navigation onboarding-pages-button">
                   <Button handleSubmit={handleSubmit} text={"Next"} />
