@@ -20,7 +20,7 @@ const getAccessToken = (userData) => {
   const accessToken = jwt.sign(
     { userData },
     JWT_SECRET,
-    { expiresIn: '24h' },
+    { expiresIn: '72h' },
   );
   return accessToken;
 }

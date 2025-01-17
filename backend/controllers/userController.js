@@ -72,10 +72,29 @@ const deleteUser = async (req, res) => {
   }
 }
 
+const sendForgetPasswordMail = async (req, res) => {
+  try {
+    const { email } = req.body;
+
+    const user = await userService.sendForgetPasswordMail(email);
+    if (user?.error) {
+      return res.status(403).send(user.error);
+    }
+
+    res.status(200).json({ message: user.message });
+  } catch(error) {
+    res.status(500).send(
+      `Error: ${error}`,
+    );
+  }
+}
+
 const resetPassword = async (req, res) => {
   try {
-    const { userId } = req.params;
+    const userId = req.params.user-id;
     const userData = req.body;
+
+    console.log('User id: ', userId, userData);
 
     const user = await userService.resetPassword(userId, userData);
     if (user?.error) {
@@ -95,5 +114,6 @@ module.exports = {
   loginUser,
   getUser,
   resetPassword,
+  sendForgetPasswordMail,
   deleteUser,
 };

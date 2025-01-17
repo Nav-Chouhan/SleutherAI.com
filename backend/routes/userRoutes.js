@@ -6,8 +6,9 @@ const user = express.Router({ mergeParams: true });
 
 user.post('/', userController.registerUser);
 user.post('/access-token', userController.loginUser);
-user.get('/:userId', authMiddleware, userController.getUser);
-user.delete('/:userId', authMiddleware, userController.deleteUser);
-user.patch('/:userId/reset-password', authMiddleware, userController.resetPassword);
+user.get('/:user-id', authMiddleware, userController.getUser);
+user.delete('/:user-id', authMiddleware, userController.deleteUser);
+user.post('/send-reset-password-mail', userController.sendForgetPasswordMail);
+user.patch('/:user-id/reset-password', authMiddleware, userController.resetPassword);
 
 module.exports = user;
