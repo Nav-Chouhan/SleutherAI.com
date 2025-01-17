@@ -10,7 +10,7 @@ function SideBar() {
           <a href="#" className="text-light text-decoration-none">
             <img
               className=""
-              style={{ width: "25px", height: "25px" }}
+              style={{ width: "23px", height: "23px" }}
               src={homeIcon}
               alt=""
             />
@@ -19,7 +19,7 @@ function SideBar() {
         </li>
         <li className="">
           <a href="#" className="text-light text-decoration-none">
-            <BsChatSquareDotsFill style={{ width: "25px", height: "25px" }} />
+            <BsChatSquareDotsFill style={{ width: "23px", height: "23px" }} />
             Comments
           </a>
         </li>

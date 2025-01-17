@@ -1,14 +1,33 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import SideBar from "../Components/SideBar";
 import SleutherLogo from "../assets/images/Frame (4).svg";
-import { useOutletContext } from "react-router-dom";
+import { Navigate, useNavigate, useOutletContext } from "react-router-dom";
 import ChatHistory from "../Components/ChatHistory";
 
 function HomePage({}) {
-  const { setPage } = useOutletContext();
+  const inputRef = useRef(null);
+  const navigate = useNavigate();
+
+  const { setPage, setPromptInput } = useOutletContext();
   useEffect(() => {
     setPage("dashboard-pages");
   }, []);
+
+  // handle button
+  const handleGenerate = () => {
+    if (inputRef.current && inputRef.current.value.trim() !== "") {
+      setPromptInput(inputRef.current.value);
+      inputRef.current.value = "";
+      navigate("/chats-page");
+    } else {
+      console.log("Input is empty or invalid");
+    }
+  };
+  const handleKeyUp = (e) => {
+    if (e.key === "Enter") {
+      handleGenerate();
+    }
+  };
   return (
     <section className="land-sec home-page-main">
       <div className="container-fluid p-0">
@@ -19,7 +38,10 @@ function HomePage({}) {
               <ChatHistory />
 
               <div className="main-content flex-grow-1 p-4">
-                <div className="text-center">
+                <div
+                  className="text-center"
+                  style={{ paddingTop: "8%", maxWidth: "90%" }}
+                >
                   <div className="logo mb-3">
                     <img
                       src={SleutherLogo}
@@ -28,23 +50,31 @@ function HomePage({}) {
                     />
                   </div>
                   <h3>Welcome, [User Name]</h3>
-                  <p>
+                  <p className="fs-5">
                     Start creating professional inspection comments instantly.
                   </p>
                   <div className="m-auto">
                     <div className="input-box-text">
-                      <div className="lable-text text-center m-auto">
+                      <div className="lable-text text-center fs-6 m-auto fw-light">
                         Simply type the issue, the location, and let Sleuther
                         handle the rest.
                       </div>
                     </div>
-                    <div className="input-box">
-                      <input
-                        type="text"
-                        placeholder="E.g.,  Leaky faucet in the kitchen (add specifics if needed)"
-                      />
-                      <div className="input-btn">
-                        <a href="#">GENERATE</a>
+                    {/* Prompt bar */}
+                    <div className="input-box ">
+                      <div className="">
+                        <input
+                          ref={inputRef}
+                          type="text"
+                          placeholder="E.g.,  Leaky faucet in the kitchen (add specifics if needed)"
+                          onKeyUp={handleKeyUp}
+                        />
+                        <div
+                          className="input-btn navigation"
+                          onClick={handleGenerate}
+                        >
+                          <a href="#">GENERATE</a>
+                        </div>
                       </div>
                       <div className="bottom-text d-flex">
                         <p

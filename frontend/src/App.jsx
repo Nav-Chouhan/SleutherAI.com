@@ -11,6 +11,7 @@ import HomePage from "./Pages/HomePage";
 import Login from "./Pages/Login";
 import ForgetPassword from "./Pages/ForgetPassword";
 import { useAuth } from "./context/AuthContext";
+import ChatsPage from "./Pages/ChatsPage";
 
 const ProtectedRoute = ({ children }) => {
   const { authState } = useAuth();
@@ -34,17 +35,25 @@ function App() {
           <Route
             path="/homepage"
             element={
-              <ProtectedRoute>
-                <HomePage />
-              </ProtectedRoute>
+              // <ProtectedRoute>
+              <HomePage />
+              // </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/chats-page"
+            element={
+              // <ProtectedRoute>
+              <ChatsPage />
+              // </ProtectedRoute>
             }
           />
           <Route
             path="/forgot-password"
             element={
-              <ProtectedRoute>
-                <ForgetPassword />
-              </ProtectedRoute>
+              // <ProtectedRoute>
+              <ForgetPassword />
+              // </ProtectedRoute>
             }
           />
         </Route>
