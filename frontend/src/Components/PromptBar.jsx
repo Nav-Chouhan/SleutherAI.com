@@ -1,27 +1,47 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import TextareaAutosize from "react-autosize-textarea";
 
 function PromptBar({ handleChange }) {
+  const textareaRef = useRef(null);
+  const [isExpanded, setIsExpanded] = useState(false);
+  const handleTextChange = (event) => {
+    if (handleChange) {
+      handleChange(event);
+    }
+    if (textareaRef.current.scrollHeight > 100) {
+      setIsExpanded(true);
+    } else {
+      setIsExpanded(false);
+    }
+  };
   return (
     <div className="input-box ">
       <div className="">
         <TextareaAutosize
-          onChange={handleChange}
+          ref={textareaRef}
+          onChange={handleTextChange}
           placeholder="E.g., Leaky faucet in the kitchen (add specifics if needed)"
           style={{
             width: "100%",
-            minWidth: "10rem",
             minHeight: "45px",
             maxHeight: "10em",
-            borderRadius: "100px",
-            padding: "10px 30px",
+            borderRadius: isExpanded ? "20px" : "100px",
+            padding: "10px 30px 10px 10px",
             fontSize: "14px",
             boxSizing: "border-box",
             resize: "none",
+            overflowY: "scroll",
+            scrollbarWidth: "none",
+            msOverflowStyle: "none",
           }}
         />
-        <div className="input-btn">
-          <a href="#">GENERATE</a>
+        <div className="input-btn" style={{ position: "relative" }}>
+          <a
+            style={{ position: "absolute", bottom: "16px", right: "0px" }}
+            href="#"
+          >
+            GENERATE
+          </a>
         </div>
       </div>
       <div className="bottom-text d-flex">

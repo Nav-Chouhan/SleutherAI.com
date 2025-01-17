@@ -2,6 +2,7 @@ import React from "react";
 import { MdContentCopy } from "react-icons/md";
 import { PiShareFatLight } from "react-icons/pi";
 import sleutherlogo from "../../assets/images/Frame (4).svg";
+import Typewriter from "./TypeWriter";
 
 function PromptResponse({ queryResponseData }) {
   return (
@@ -10,8 +11,9 @@ function PromptResponse({ queryResponseData }) {
         <li className="chat-logo" style={{ paddingRight: "1%" }}>
           <img src={sleutherlogo} alt="" />
         </li>
-        <li className="text-border-box">
-          {queryResponseData}
+        <li className="text-border-box ai-reply">
+          <Typewriter text={queryResponseData} />
+
           <div className="d-flex justify-content-between">
             <div className="left">
               <a href="#">Save to bank</a>

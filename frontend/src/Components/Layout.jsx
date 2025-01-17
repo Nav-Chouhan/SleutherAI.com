@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "./Header";
 import { Outlet, useNavigate } from "react-router-dom";
 import axiosInstance from "../utils/axiosInstance";
@@ -15,6 +15,14 @@ function Layout() {
   const [conciseness, setConciseness] = useState("Very concise");
   const [promptInput, setPromptInput] = useState("");
   const { setAuthState } = useAuth(); //auth state from context
+
+  //auth redirect function
+  useEffect(() => {
+    const authToken = localStorage.getItem("authToken");
+    if (authToken) {
+      navigate("/homepage");
+    } else navigate("/login");
+  }, []);
 
   // Handle signup function
   const handleSignUp = async (formData) => {
