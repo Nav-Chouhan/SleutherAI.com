@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import SideBar from "../Components/SideBar";
 import ChatHistory from "../Components/ChatHistory";
 import PromptBar from "../Components/PromptBar";
@@ -14,16 +14,16 @@ const sampleData = [
     promptResponse:
       "The faucet in the kitchen drips water continuously, causing a small puddle to form over time. The leakage seems to come from the base of the faucet.There is a visible crack running through a ceramic tile on the shower wall. The crack appears to be the result of either a heavy impact or consistent pressure over time.There is a visible crack running through a ceramic tile on the shower wall. The crack appears to be the result of either a heavy impact or consistent pressure over time.There is a visible crack running through a ceramic tile on the shower wall. The crack appears to be the result of either a heavy impact or consistent pressure over time.tile on the shower wall. The crack appears to be the result of either a heavy impact or consistent pressure over time.There is a visible crack running through a ceramic tile on the shower wall. The crack appears to be the result of either a heavy impact or consistent pressure over time.tile on the shower wall. The crack appears to be the result of either a heavy impact or consistent pressure over time.There is a visible crack running through a ceramic tile on the shower wall. The crack appears to be the result of either a heavy impact or consistent pressure over time.",
   },
-  {
-    prompt: "Explain a cracked tile in the bathroom.",
-    promptResponse:
-      "There is a visible crack running through a ceramic tile on the shower wall. The crack appears to be the result of either a heavy impact or consistent pressure over time.",
-  },
-  {
-    prompt: "Detail the condition of the attic insulation.",
-    promptResponse:
-      "The attic insulation looks worn and uneven in some areas. Fiberglass batts are partially detached, reducing their ability to retain heat and energy.",
-  },
+  // {
+  //   prompt: "Explain a cracked tile in the bathroom.",
+  //   promptResponse:
+  //     "There is a visible crack running through a ceramic tile on the shower wall. The crack appears to be the result of either a heavy impact or consistent pressure over time.",
+  // },
+  // {
+  //   prompt: "Detail the condition of the attic insulation.",
+  //   promptResponse:
+  //     "The attic insulation looks worn and uneven in some areas. Fiberglass batts are partially detached, reducing their ability to retain heat and energy.",
+  // },
   // {
   //   prompt: "Describe the exterior paint condition of the house.",
   //   promptResponse:
@@ -42,6 +42,7 @@ const sampleData = [
 ];
 
 function ChatsPage() {
+  const [inputBoxExpanded, setInputBoxExpaned] = useState(false);
   const { setPage, promptInput } = useOutletContext();
   useEffect(() => {
     setPage("dashboard-pages");
@@ -59,17 +60,26 @@ function ChatsPage() {
                 <ChatNavbar />
 
                 <div className=" m-auto relative">
-                  <div className="chat-container">
-                    <div className="position-fixed top-7">
+                  <div
+                    className={`${
+                      inputBoxExpanded
+                        ? "chat-container-height"
+                        : "chat-container"
+                    }`}
+                  >
+                    <div
+                      className="position-fixed"
+                      style={{ top: "14rem", left: "22rem" }}
+                    >
                       <ChatResponseIcons />
                     </div>
 
                     {sampleData.map(({ prompt, promptResponse }) => (
                       <div
-                        style={{ width: "80%", marginLeft: "9rem" }}
+                        style={{ width: "900px", marginLeft: "9rem" }}
                         key={prompt}
                       >
-                        <div className="response pt-2 d-flex flex-column flex-start gap-2 ">
+                        <div className="response pt-1 d-flex flex-column flex-start gap-3 ">
                           <PromptQuery querydata={prompt} />
                           <PromptResponse queryResponseData={promptResponse} />
                         </div>
@@ -79,7 +89,10 @@ function ChatsPage() {
 
                   <div className="text-center bottom-input">
                     <div className="w-90 m-auto">
-                      <PromptBar />
+                      <PromptBar
+                        inputBoxExpanded={inputBoxExpanded}
+                        setInputBoxExpaned={setInputBoxExpaned}
+                      />
                     </div>
                   </div>
                 </div>

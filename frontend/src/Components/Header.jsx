@@ -1,10 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Link } from "react-router-dom";
 import { MdAccountCircle } from "react-icons/md";
-import { IoIosSettings } from "react-icons/io";
+import Modal from "react-modal";
+import ProfileModal from "./ProfileModal";
 
-function Header({ page }) {
+function Header({ page, profileModalState, setProfileModalState }) {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const handleMouseEnterIcon = () => setIsModalOpen(true);
+  const handleMouseLeaveModalArea = (e) => {
+    if (!e.relatedTarget || !e.relatedTarget.closest(".modal-content")) {
+      setIsModalOpen(false);
+    }
+  };
   return (
     <header>
       <div className="container-fluid">
@@ -43,14 +51,12 @@ function Header({ page }) {
           )}
           {page == "dashboard-pages" && (
             <div className="col-xl-2 col-lg-2 col-md-12 col-sm-12">
-              <ul className="menu-bar">
-                <li>
-                  <Link className="settings-icon" to="#">
-                    <IoIosSettings />
-                  </Link>
-                </li>
-                <li>
-                  <Link className="account-icon" to="#">
+              <ul className="menu-bar ">
+                <li
+                  onMouseEnter={handleMouseEnterIcon}
+                  onClick={handleMouseLeaveModalArea}
+                >
+                  <Link className="account-icon " to="#">
                     <MdAccountCircle />
                   </Link>
                 </li>
@@ -58,6 +64,36 @@ function Header({ page }) {
             </div>
           )}
         </div>
+
+        <Modal
+          isOpen={isModalOpen}
+          onRequestClose={() => setIsModalOpen(false)}
+          onMouseLeave={handleMouseLeaveModalArea}
+          style={{
+            overlay: { backgroundColor: "rgba(220, 209, 209, 0)" },
+            content: {
+              backgroundColor: "white",
+              height: "40%",
+              margin: "auto",
+
+              top: "7%",
+              right: "7.5%",
+              position: "absolute",
+              width: "340px",
+              border: "none",
+              borderRadius: "40px",
+              scrollbarWidth: "none",
+            },
+          }}
+          contentLabel=""
+          className="modal-content"
+        >
+          <ProfileModal
+            type={profileModalState.type}
+            profileData={profileModalState.data}
+            onClose={() => setIsHovered(false)}
+          />
+        </Modal>
       </div>
     </header>
   );

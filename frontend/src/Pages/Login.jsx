@@ -1,9 +1,10 @@
-import React, { useState } from "react";
-import { Link, useOutletContext } from "react-router-dom";
+import React from "react";
+import { Link, useNavigate, useOutletContext } from "react-router-dom";
 import PasswordInput from "../Components/PasswordInput";
 import { useForm } from "react-hook-form";
 
 function Login() {
+  const navigate = useNavigate();
   const { handleLogin } = useOutletContext();
   const {
     register,
@@ -64,7 +65,7 @@ function Login() {
             style={{ fontSize: "0.9rem" }}
           >
             <Link
-              to="/forgot-password"
+              to={"/user/mailpage"}
               className="text-primary text-decoration-underline"
             >
               forgot password

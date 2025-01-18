@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import SideBar from "../Components/SideBar";
 import SleutherLogo from "../assets/images/Frame (4).svg";
-import { Navigate, useNavigate, useOutletContext } from "react-router-dom";
+import { useNavigate, useOutletContext } from "react-router-dom";
 import ChatHistory from "../Components/ChatHistory";
 
 function HomePage({}) {
@@ -18,7 +18,8 @@ function HomePage({}) {
     if (inputRef.current && inputRef.current.value.trim() !== "") {
       setPromptInput(inputRef.current.value);
       inputRef.current.value = "";
-      navigate("/chats-page");
+      const userId = localStorage.getItem("user-id");
+      navigate(`/${userId}/chats-page`);
     } else {
       console.log("Input is empty or invalid");
     }

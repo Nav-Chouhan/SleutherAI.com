@@ -3,7 +3,6 @@ import PasswordInput from "../Components/PasswordInput";
 import Button from "../Components/before-onboarding/Button";
 
 function ForgetPassword() {
-  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   return (
@@ -12,18 +11,8 @@ function ForgetPassword() {
         <div className="row justify-content-center">
           <div className="col-xl-6 col-lg-6 col-md-12 col-sm-12">
             <div className="content border px-4 py-5 rounded bg-white">
-              <h2>Re-set your password</h2>
-              <fieldset>
-                <input
-                  type="username"
-                  placeholder="Username"
-                  className="form-control mb-3"
-                  value={email}
-                  onChange={(e) => {
-                    setEmail(e.target.value);
-                  }}
-                />
-              </fieldset>
+              <h2>Reset your password</h2>
+
               <fieldset>
                 <PasswordInput
                   value={password}
