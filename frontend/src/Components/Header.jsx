@@ -1,24 +1,39 @@
 import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { MdAccountCircle } from "react-icons/md";
 import Modal from "react-modal";
 import ProfileModal from "./ProfileModal";
 
 function Header({ page, profileModalState, setProfileModalState }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const navigate = useNavigate();
+
   const handleMouseEnterIcon = () => setIsModalOpen(true);
   const handleMouseLeaveModalArea = (e) => {
     if (!e.relatedTarget || !e.relatedTarget.closest(".modal-content")) {
       setIsModalOpen(false);
     }
   };
+
+  const handleLogoClick = (e) => {
+    e.preventDefault();
+    const token = localStorage.getItem("authToken");
+    if (!token) {
+      navigate("/");
+    }
+  };
+
   return (
     <header>
       <div className="container-fluid">
         <div className="row align-items-center py-2">
           <div className="col-xl-10 col-lg-10 col-md-12 col-sm-12">
-            <div className="logo-img">
+            <div
+              className="logo-img"
+              onClick={handleLogoClick}
+              style={{ cursor: "pointer" }}
+            >
               <svg
                 width="243"
                 height="57"
@@ -51,12 +66,16 @@ function Header({ page, profileModalState, setProfileModalState }) {
           )}
           {page == "dashboard-pages" && (
             <div className="col-xl-2 col-lg-2 col-md-12 col-sm-12">
-              <ul className="menu-bar ">
+              <ul className="menu-bar">
                 <li
-                  onMouseEnter={handleMouseEnterIcon}
                   onClick={handleMouseLeaveModalArea}
+                  className="cursor-pointer "
                 >
-                  <Link className="account-icon " to="#">
+                  <Link
+                    onMouseEnter={handleMouseEnterIcon}
+                    className="account-icon ms-7"
+                    to="#"
+                  >
                     <MdAccountCircle />
                   </Link>
                 </li>
@@ -75,9 +94,8 @@ function Header({ page, profileModalState, setProfileModalState }) {
               backgroundColor: "white",
               height: "40%",
               margin: "auto",
-
               top: "7%",
-              right: "7.5%",
+              right: "4%",
               position: "absolute",
               width: "340px",
               border: "none",

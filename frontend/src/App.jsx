@@ -17,11 +17,16 @@ import NotFound from "./Pages/NotFound";
 import CommentsPage from "./Pages/CommentsPage";
 import PricingPlan from "./Pages/PricingPlan";
 import UserProfile from "./Pages/UserProfile";
+import Loader from "./Components/Loader";
 
 const ProtectedRoute = ({ children }) => {
   const { authState } = useAuth();
   if (!authState.isAuthenticated && localStorage.getItem("authToken")) {
-    return <div>Loading...</div>;
+    return (
+      <div>
+        <Loader />
+      </div>
+    );
   }
   return authState.isAuthenticated ? children : <Navigate to="/login" />;
 };

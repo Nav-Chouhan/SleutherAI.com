@@ -7,6 +7,7 @@ import PromptQuery from "../Components/chats-components/PromptQuery";
 import ChatNavbar from "../Components/chats-components/ChatNavbar";
 import PromptResponse from "../Components/chats-components/PromptResponse";
 import { useOutletContext } from "react-router-dom";
+import EditCommentModal from "../Components/EditCommentModal";
 
 const sampleData = [
   {
@@ -42,11 +43,25 @@ const sampleData = [
 ];
 
 function ChatsPage() {
-  const [inputBoxExpanded, setInputBoxExpaned] = useState(false);
-  const { setPage, promptInput } = useOutletContext();
+  const [inputBoxExpanded, setInputBoxExpanded] = useState(false);
+  const { setPage } = useOutletContext();
+  const [showEditModal, setShowEditModal] = useState(false);
+  const [selectedComment, setSelectedComment] = useState("");
+
   useEffect(() => {
     setPage("dashboard-pages");
   }, []);
+
+  const handleEditClick = (comment) => {
+    setSelectedComment(comment);
+    setShowEditModal(true);
+  };
+
+  const handleSaveEdit = (editedComment) => {
+    // Handle saving the edited comment
+    setShowEditModal(false);
+  };
+
   return (
     <section className="land-sec home-page-main">
       <div className="container-fluid p-0">
@@ -81,7 +96,10 @@ function ChatsPage() {
                       >
                         <div className="response pt-1 d-flex flex-column flex-start gap-3 ">
                           <PromptQuery querydata={prompt} />
-                          <PromptResponse queryResponseData={promptResponse} />
+                          <PromptResponse
+                            queryResponseData={promptResponse}
+                            setShowEditModal={setShowEditModal}
+                          />
                         </div>
                       </div>
                     ))}
@@ -91,16 +109,42 @@ function ChatsPage() {
                     <div className="w-90 m-auto">
                       <PromptBar
                         inputBoxExpanded={inputBoxExpanded}
-                        setInputBoxExpaned={setInputBoxExpaned}
+                        setInputBoxExpanded={setInputBoxExpanded}
                       />
                     </div>
                   </div>
                 </div>
+                {showEditModal && (
+                  <div
+                    className=""
+                    style={{
+                      height: "55.7rem",
+                      width: "100rem",
+                      top: "4.8rem",
+                      left: "20rem",
+                      gap: "0px",
+                      position: "fixed",
+                      background: "rgb(135 130 130 / 69%)",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      zIndex: 1050,
+                    }}
+                  >
+                    <EditCommentModal
+                      comment={selectedComment}
+                      onClose={() => setShowEditModal(false)}
+                      onSave={handleSaveEdit}
+                    />
+                  </div>
+                )}
               </div>
             </div>
           </div>
         </div>
       </div>
+
+      {/* Add the modal */}
     </section>
   );
 }

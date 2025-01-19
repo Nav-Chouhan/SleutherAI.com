@@ -211,6 +211,7 @@ function Layout() {
             handleLogin,
             promptInput,
             setPromptInput,
+            setProfileModalstate,
           }}
         />
       </main>

@@ -1,16 +1,16 @@
 import React, { useRef } from "react";
 import TextareaAutosize from "react-autosize-textarea";
 
-function PromptBar({ handleChange, inputBoxExpanded, setInputBoxExpaned }) {
+function PromptBar({ handleChange, inputBoxExpanded, setInputBoxExpanded }) {
   const textareaRef = useRef(null);
   const handleTextChange = (event) => {
     if (handleChange) {
       handleChange(event);
     }
     if (textareaRef.current.scrollHeight > 50) {
-      setInputBoxExpaned(true);
+      setInputBoxExpanded(true);
     } else {
-      setInputBoxExpaned(false);
+      setInputBoxExpanded(false);
     }
   };
   return (

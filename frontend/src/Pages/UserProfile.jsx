@@ -1,7 +1,6 @@
 import React from "react";
 import { FaPhoneAlt, FaEnvelope, FaPen } from "react-icons/fa";
 import SideBar from "./../Components/SideBar";
-import ChatHistory from "./../Components/ChatHistory";
 
 const UserProfile = () => {
   return (
@@ -11,60 +10,58 @@ const UserProfile = () => {
           <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 p-0">
             <div className="d-flex">
               <SideBar />
-              <ChatHistory />
-              <div className="d-flex justify-between-center align-item-center">
-                <div
-                  className="profile-container bg-white shadow rounded p-4"
-                  style={{ maxWidth: "500px" }}
-                >
-                  <div className="d-flex justify-content-between align-items-center mb-3">
-                    <h5 className="mb-0">My profile</h5>
+              <div
+                className="flex-grow-1 d-flex justify-content-center align-items-start p-4"
+                style={{ backgroundColor: "#f8f9fa" }}
+              >
+                <div className="profile-modal-container p-4">
+                  <div className="profile-modal-header">
+                    <h5 className="profile-modal-title">My profile</h5>
                     <button
-                      className="btn-close"
+                      className="profile-modal-close btn-close"
                       aria-label="Close"
                       onClick={() => console.log("Close Modal")}
                     ></button>
                   </div>
 
-                  <div className="d-flex align-items-start gap-3 mb-4">
-                    <div
-                      className="bg-dark text-white d-flex justify-content-center align-items-center rounded-circle"
-                      style={{
-                        width: "80px",
-                        height: "80px",
-                        fontSize: "1.5rem",
-                        fontWeight: "bold",
-                      }}
-                    >
-                      JT
+                  <div className="d-flex flex-column gap-3 text-start">
+                    <div className="profile-avatar">JT</div>
+                    <div className="profile-info">
+                      <h5 className="profile-name fs-4 fw-bold">
+                        James Tillapaugh
+                      </h5>
+                      <div className="d-flex flex-column gap-2 pt-2">
+                        <p className="profile-details ">
+                          Licensed Home Inspector #67877
+                          <br />
+                          HIABC Accredited Home Inspector
+                        </p>
+                        <p className="profile-company ">
+                          Bloodhound Home Inspections
+                        </p>
+                      </div>
                     </div>
-                    <div>
-                      <h5 className="mb-1">James Tillapaugh</h5>
-                      <p className="text-muted mb-1">
-                        Licensed Home Inspector #67877 <br />
-                        HIABC Accredited Home Inspector
+                  </div>
+
+                  <div className="profile-contact">
+                    <div className="profile-contact-item">
+                      <FaPhoneAlt size={14} style={{ color: "#6C757D" }} />
+                      <p className="profile-contact-text">250.893.2070</p>
+                    </div>
+                    <div className="profile-contact-item">
+                      <FaEnvelope size={14} style={{ color: "#6C757D" }} />
+                      <p className="profile-contact-text">
+                        JamesTpaugh@gmail.com
                       </p>
-                      <strong>Bloodhound Home Inspections</strong>
                     </div>
                   </div>
 
-                  <div className="mb-4">
-                    <div className="d-flex align-items-center gap-2 mb-2">
-                      <FaPhoneAlt className="text-muted" />
-                      <p className="mb-0">250.893.2070</p>
-                    </div>
-                    <div className="d-flex align-items-center gap-2">
-                      <FaEnvelope className="text-muted" />
-                      <p className="mb-0">JamesTpaugh@gmail.com</p>
-                    </div>
-                  </div>
-
-                  <div className="d-flex justify-content-between align-items-center border-top pt-3">
-                    <button className="btn btn-link text-decoration-none">
+                  <div className="profile-footer">
+                    <button className="change-password-btn">
                       Change password
                     </button>
-                    <button className="btn btn-light rounded-circle d-flex align-items-center justify-content-center">
-                      <FaPen />
+                    <button className="edit-profile-btn">
+                      <FaPen size={14} style={{ color: "#212529" }} />
                     </button>
                   </div>
                 </div>

@@ -4,7 +4,10 @@ import { PiShareFatLight } from "react-icons/pi";
 import sleutherlogo from "../../assets/images/Frame (4).svg";
 import Typewriter from "./TypeWriter";
 
-function PromptResponse({ queryResponseData }) {
+function PromptResponse({ queryResponseData, setShowEditModal }) {
+  const handleEdit = () => {
+    setShowEditModal(true);
+  };
   return (
     <div className="text-res-sec">
       <ul className="d-flex gap-2">
@@ -57,7 +60,7 @@ function PromptResponse({ queryResponseData }) {
                 </li>
               </ul>
             </div>
-            <div className="right">
+            <div className="right d-flex justify-content-center align-items-center gap-2">
               <svg
                 width="18"
                 height="18"
@@ -97,7 +100,9 @@ function PromptResponse({ queryResponseData }) {
                 />
               </svg>
 
-              <a href="#">Edit</a>
+              <a href="#" onClick={handleEdit}>
+                Edit
+              </a>
             </div>
           </div>
         </li>

@@ -9,8 +9,14 @@ function PricingPlan() {
         <div className="col-lg-4 col-md-6 ">
           <div className="pricing-card mt-3 text-start">
             <h5 className="fw-bold">Free trial</h5>
-            <p className="price">$0</p>
-            <p className="price-subtext">USE/month</p>
+            <div className="d-flex  gap-2">
+              <p className="price ">$0</p>
+              <p className="price-subtext pt-4 ps-1 ">
+                USE/
+                <br />
+                month
+              </p>
+            </div>
 
             <p>See how Sleuther can help create report-ready comments</p>
             <button className=" rounded-pill btn-current-plan" disabled>
@@ -33,8 +39,14 @@ function PricingPlan() {
         >
           <div className="pricing-card mt-3 text-start">
             <h5 className="fw-bold ">Standard</h5>
-            <p className="price ">$15</p>
-            <p className="price-subtext">USE/month</p>
+            <div className="d-flex  gap-2">
+              <p className="price ">$15</p>
+              <p className="price-subtext pt-4 ps-1">
+                USE/
+                <br />
+                month
+              </p>
+            </div>
             <p>Unlock Sleuther and boost your productivity</p>
             <button className="btn rounded-pill btn-dark upgrade-button">
               Upgrade your plan
@@ -52,8 +64,15 @@ function PricingPlan() {
         <div className="col-lg-4 col-md-6">
           <div className="pricing-card mt-3 text-start">
             <h5 className="fw-bold ">Pro</h5>
-            <p className="price ">$24</p>
-            <p className="price-subtext">USE/month</p>
+            <div className="d-flex  gap-2">
+              <p className="price ">$24</p>
+              <p className="price-subtext pt-4 ps-1">
+                USE/
+                <br />
+                month
+              </p>
+            </div>
+
             <p>Unlimited comment generation</p>
             <button className="btn rounded-pill btn-dark upgrade-button">
               Upgrade your plan

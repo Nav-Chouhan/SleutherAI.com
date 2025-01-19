@@ -1,7 +1,12 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useOutletContext } from "react-router-dom";
 
 function NotFound() {
+  const { setPage, setProfileModalstate } = useOutletContext();
+  useEffect(() => {
+    setPage("Landing");
+    setProfileModalstate(false);
+  }, []);
   return (
     <div style={{ textAlign: "center", marginTop: "50px" }}>
       <h1>404 - Page Not Found</h1>

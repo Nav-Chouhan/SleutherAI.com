@@ -82,7 +82,7 @@ const ProfileModal = () => {
               onClick={() => {
                 localStorage.removeItem("authToken");
                 localStorage.removeItem("user-id");
-                handleNavigation("/login");
+                handleNavigation("/");
               }}
               className="btn btn-link text-start w-100 d-flex align-items-center gap-2 fs-5"
             >
