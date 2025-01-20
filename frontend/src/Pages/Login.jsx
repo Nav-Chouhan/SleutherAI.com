@@ -1,19 +1,25 @@
-import React, { useState } from "react";
-import { Link, useOutletContext } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Link, useNavigate, useOutletContext } from "react-router-dom";
 import PasswordInput from "../Components/PasswordInput";
 import { useForm } from "react-hook-form";
 
 function Login() {
-  const { handleLogin } = useOutletContext();
+  const navigate = useNavigate();
+  const { handleLogin, setPage, setProfileModalstate } = useOutletContext();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
+  useEffect(() => {
+    setPage("Landing");
+  }, []);
+
   //handle login
   const onSubmit = (data) => {
     handleLogin(data);
+    setProfileModalstate(false);
   };
   return (
     <>
@@ -64,7 +70,7 @@ function Login() {
             style={{ fontSize: "0.9rem" }}
           >
             <Link
-              to="/forgot-password"
+              to={"/user/mailpage"}
               className="text-primary text-decoration-underline"
             >
               forgot password

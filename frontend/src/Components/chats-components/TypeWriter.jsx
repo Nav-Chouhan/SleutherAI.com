@@ -13,7 +13,7 @@ function Typewriter({ text }) {
       } else {
         clearInterval(interval);
       }
-    }, 20);
+    }, 20); // adjust speed
 
     return () => clearInterval(interval);
   }, [text]);

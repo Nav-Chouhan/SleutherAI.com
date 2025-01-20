@@ -1,0 +1,4 @@
+pricing page - done
+profile modal fix - done
+profile settings pages
+loader

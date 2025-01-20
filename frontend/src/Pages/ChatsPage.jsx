@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import SideBar from "../Components/SideBar";
 import ChatHistory from "../Components/ChatHistory";
 import PromptBar from "../Components/PromptBar";
@@ -7,6 +7,7 @@ import PromptQuery from "../Components/chats-components/PromptQuery";
 import ChatNavbar from "../Components/chats-components/ChatNavbar";
 import PromptResponse from "../Components/chats-components/PromptResponse";
 import { useOutletContext } from "react-router-dom";
+import EditCommentModal from "../Components/EditCommentModal";
 
 const sampleData = [
   {
@@ -14,16 +15,16 @@ const sampleData = [
     promptResponse:
       "The faucet in the kitchen drips water continuously, causing a small puddle to form over time. The leakage seems to come from the base of the faucet.There is a visible crack running through a ceramic tile on the shower wall. The crack appears to be the result of either a heavy impact or consistent pressure over time.There is a visible crack running through a ceramic tile on the shower wall. The crack appears to be the result of either a heavy impact or consistent pressure over time.There is a visible crack running through a ceramic tile on the shower wall. The crack appears to be the result of either a heavy impact or consistent pressure over time.tile on the shower wall. The crack appears to be the result of either a heavy impact or consistent pressure over time.There is a visible crack running through a ceramic tile on the shower wall. The crack appears to be the result of either a heavy impact or consistent pressure over time.tile on the shower wall. The crack appears to be the result of either a heavy impact or consistent pressure over time.There is a visible crack running through a ceramic tile on the shower wall. The crack appears to be the result of either a heavy impact or consistent pressure over time.",
   },
-  {
-    prompt: "Explain a cracked tile in the bathroom.",
-    promptResponse:
-      "There is a visible crack running through a ceramic tile on the shower wall. The crack appears to be the result of either a heavy impact or consistent pressure over time.",
-  },
-  {
-    prompt: "Detail the condition of the attic insulation.",
-    promptResponse:
-      "The attic insulation looks worn and uneven in some areas. Fiberglass batts are partially detached, reducing their ability to retain heat and energy.",
-  },
+  // {
+  //   prompt: "Explain a cracked tile in the bathroom.",
+  //   promptResponse:
+  //     "There is a visible crack running through a ceramic tile on the shower wall. The crack appears to be the result of either a heavy impact or consistent pressure over time.",
+  // },
+  // {
+  //   prompt: "Detail the condition of the attic insulation.",
+  //   promptResponse:
+  //     "The attic insulation looks worn and uneven in some areas. Fiberglass batts are partially detached, reducing their ability to retain heat and energy.",
+  // },
   // {
   //   prompt: "Describe the exterior paint condition of the house.",
   //   promptResponse:
@@ -42,10 +43,25 @@ const sampleData = [
 ];
 
 function ChatsPage() {
-  const { setPage, promptInput } = useOutletContext();
+  const [inputBoxExpanded, setInputBoxExpanded] = useState(false);
+  const { setPage } = useOutletContext();
+  const [showEditModal, setShowEditModal] = useState(false);
+  const [selectedComment, setSelectedComment] = useState("");
+
   useEffect(() => {
     setPage("dashboard-pages");
   }, []);
+
+  const handleEditClick = (comment) => {
+    setSelectedComment(comment);
+    setShowEditModal(true);
+  };
+
+  const handleSaveEdit = (editedComment) => {
+    // Handle saving the edited comment
+    setShowEditModal(false);
+  };
+
   return (
     <section className="land-sec home-page-main">
       <div className="container-fluid p-0">
@@ -59,19 +75,31 @@ function ChatsPage() {
                 <ChatNavbar />
 
                 <div className=" m-auto relative">
-                  <div className="chat-container">
-                    <div className="position-fixed top-7">
+                  <div
+                    className={`${
+                      inputBoxExpanded
+                        ? "chat-container-height"
+                        : "chat-container"
+                    }`}
+                  >
+                    <div
+                      className="position-fixed"
+                      style={{ top: "14rem", left: "22rem" }}
+                    >
                       <ChatResponseIcons />
                     </div>
 
                     {sampleData.map(({ prompt, promptResponse }) => (
                       <div
-                        style={{ width: "80%", marginLeft: "9rem" }}
+                        style={{ width: "900px", marginLeft: "9rem" }}
                         key={prompt}
                       >
-                        <div className="response pt-2 d-flex flex-column flex-start gap-2 ">
+                        <div className="response pt-1 d-flex flex-column flex-start gap-3 ">
                           <PromptQuery querydata={prompt} />
-                          <PromptResponse queryResponseData={promptResponse} />
+                          <PromptResponse
+                            queryResponseData={promptResponse}
+                            setShowEditModal={setShowEditModal}
+                          />
                         </div>
                       </div>
                     ))}
@@ -79,15 +107,44 @@ function ChatsPage() {
 
                   <div className="text-center bottom-input">
                     <div className="w-90 m-auto">
-                      <PromptBar />
+                      <PromptBar
+                        inputBoxExpanded={inputBoxExpanded}
+                        setInputBoxExpanded={setInputBoxExpanded}
+                      />
                     </div>
                   </div>
                 </div>
+                {showEditModal && (
+                  <div
+                    className=""
+                    style={{
+                      height: "55.7rem",
+                      width: "100rem",
+                      top: "4.8rem",
+                      left: "20rem",
+                      gap: "0px",
+                      position: "fixed",
+                      background: "rgb(135 130 130 / 69%)",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      zIndex: 1050,
+                    }}
+                  >
+                    <EditCommentModal
+                      comment={selectedComment}
+                      onClose={() => setShowEditModal(false)}
+                      onSave={handleSaveEdit}
+                    />
+                  </div>
+                )}
               </div>
             </div>
           </div>
         </div>
       </div>
+
+      {/* Add the modal */}
     </section>
   );
 }

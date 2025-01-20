@@ -12,10 +12,23 @@ import Login from "./Pages/Login";
 import ForgetPassword from "./Pages/ForgetPassword";
 import { useAuth } from "./context/AuthContext";
 import ChatsPage from "./Pages/ChatsPage";
+import ResetMailPage from "./Pages/ResetMailPage";
+import NotFound from "./Pages/NotFound";
+import CommentsPage from "./Pages/CommentsPage";
+import PricingPlan from "./Pages/PricingPlan";
+import UserProfile from "./Pages/UserProfile";
+import Loader from "./Components/Loader";
+import AiPreferences from "./Pages/AiPreferences";
 
 const ProtectedRoute = ({ children }) => {
   const { authState } = useAuth();
-
+  if (!authState.isAuthenticated && localStorage.getItem("authToken")) {
+    return (
+      <div>
+        <Loader />
+      </div>
+    );
+  }
   return authState.isAuthenticated ? children : <Navigate to="/login" />;
 };
 
@@ -30,32 +43,58 @@ function App() {
           <Route path="/fourth-step" element={<OnboardingPage3 />} />
           <Route path="/fifth-step" element={<OnboardingPage4 />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/pricing" element={<PricingPlan />} />
 
           {/* Protected Routes */}
           <Route
-            path="/homepage"
+            path="/:user-id/user"
             element={
-              // <ProtectedRoute>
-              <HomePage />
-              // </ProtectedRoute>
+              <ProtectedRoute>
+                <HomePage />
+              </ProtectedRoute>
             }
           />
           <Route
-            path="/chats-page"
+            path="/:user-id/profile"
             element={
-              // <ProtectedRoute>
-              <ChatsPage />
-              // </ProtectedRoute>
+              <ProtectedRoute>
+                <UserProfile />
+              </ProtectedRoute>
             }
           />
           <Route
-            path="/forgot-password"
+            path="/:user-id/chats-page"
             element={
-              // <ProtectedRoute>
-              <ForgetPassword />
-              // </ProtectedRoute>
+              <ProtectedRoute>
+                <ChatsPage />
+              </ProtectedRoute>
             }
           />
+          <Route
+            path="/comments-page"
+            element={
+              <ProtectedRoute>
+                <CommentsPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/ai-preferences"
+            element={
+              <ProtectedRoute>
+                <AiPreferences />
+              </ProtectedRoute>
+            }
+          />
+
+          {/* password reset pages */}
+          <Route path="/user/mailpage" element={<ResetMailPage />} />
+
+          <Route
+            path="/:user-id/forgot-password"
+            element={<ForgetPassword />}
+          />
+          <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
     </Router>

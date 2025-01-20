@@ -1,16 +1,39 @@
-import React from "react";
+import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { MdAccountCircle } from "react-icons/md";
-import { IoIosSettings } from "react-icons/io";
+import Modal from "react-modal";
+import ProfileModal from "./ProfileModal";
 
-function Header({ page }) {
+function Header({ page, profileModalState, setProfileModalState }) {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const navigate = useNavigate();
+
+  const handleMouseEnterIcon = () => setIsModalOpen(true);
+  const handleMouseLeaveModalArea = (e) => {
+    if (!e.relatedTarget || !e.relatedTarget.closest(".modal-content")) {
+      setIsModalOpen(false);
+    }
+  };
+
+  const handleLogoClick = (e) => {
+    e.preventDefault();
+    const token = localStorage.getItem("authToken");
+    if (!token) {
+      navigate("/");
+    }
+  };
+
   return (
     <header>
       <div className="container-fluid">
         <div className="row align-items-center py-2">
           <div className="col-xl-10 col-lg-10 col-md-12 col-sm-12">
-            <div className="logo-img">
+            <div
+              className="logo-img"
+              onClick={handleLogoClick}
+              style={{ cursor: "pointer" }}
+            >
               <svg
                 width="243"
                 height="57"
@@ -44,20 +67,70 @@ function Header({ page }) {
           {page == "dashboard-pages" && (
             <div className="col-xl-2 col-lg-2 col-md-12 col-sm-12">
               <ul className="menu-bar">
-                <li>
-                  <Link className="settings-icon" to="#">
-                    <IoIosSettings />
-                  </Link>
-                </li>
-                <li>
-                  <Link className="account-icon" to="#">
+                <li
+                  onClick={handleMouseLeaveModalArea}
+                  className="cursor-pointer"
+                >
+                  <Link
+                    onMouseEnter={handleMouseEnterIcon}
+                    className="account-icon ms-7"
+                    to="#"
+                  >
                     <MdAccountCircle />
                   </Link>
                 </li>
               </ul>
             </div>
           )}
+          {page == "pricing" && (
+            <div className="col-xl-2 col-lg-2 col-md-12 col-sm-12">
+              <ul className="menu-bar">
+                <li
+                  onClick={handleMouseLeaveModalArea}
+                  className="cursor-pointer "
+                >
+                  <button
+                    className="profile-modal-close btn-close ms-7 pt-2"
+                    aria-label="Close"
+                    onClick={() => {
+                      const userId = localStorage.getItem("user-id");
+                      navigate(`/${userId}/chats-page`);
+                    }}
+                  ></button>
+                </li>
+              </ul>
+            </div>
+          )}
         </div>
+
+        <Modal
+          isOpen={isModalOpen}
+          onRequestClose={() => setIsModalOpen(false)}
+          onMouseLeave={handleMouseLeaveModalArea}
+          style={{
+            overlay: { backgroundColor: "rgba(220, 209, 209, 0)" },
+            content: {
+              backgroundColor: "white",
+              height: "40%",
+              margin: "auto",
+              top: "7%",
+              right: "4%",
+              position: "absolute",
+              width: "340px",
+              border: "none",
+              borderRadius: "40px",
+              scrollbarWidth: "none",
+            },
+          }}
+          contentLabel=""
+          className="modal-content"
+        >
+          <ProfileModal
+            type={profileModalState.type}
+            profileData={profileModalState.data}
+            onClose={() => setIsHovered(false)}
+          />
+        </Modal>
       </div>
     </header>
   );
