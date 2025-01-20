@@ -6,7 +6,9 @@ const registerUser = async (req, res) => {
 
     const user = await userService.registerUser(userData);
     if (user?.error) {
-      return res.status(403).send(user.error);
+      return res.status(403).json({
+        error: user.error,
+      });
     }
 
     res.status(201).json({ user });
@@ -27,7 +29,9 @@ const loginUser = async (req, res) => {
       if (user.error === 'User not found') {
         statusCode = 404;
       }
-      return res.status(statusCode).send(user.error);
+      return res.status(statusCode).json({
+        error: user.error,
+      });
     }
 
     res.status(200).json({ user });
@@ -44,7 +48,9 @@ const getUser = async (req, res) => {
 
     const user = await userService.getUser(userId);
     if (user?.error) {
-      return res.status(403).send(user.error);
+      return res.status(403).json({
+        error: user.error,
+      });
     }
 
     res.status(200).json({ user });
@@ -61,7 +67,9 @@ const deleteUser = async (req, res) => {
 
     const user = await userService.deleteUser(userId, userData);
     if (user?.error) {
-      return res.status(403).send(user.error);
+      return res.status(403).json({
+        error: user.error,
+      });
     }
 
     res.status(204);
@@ -78,7 +86,9 @@ const sendForgetPasswordMail = async (req, res) => {
 
     const user = await userService.sendForgetPasswordMail(email);
     if (user?.error) {
-      return res.status(403).send(user.error);
+      return res.status(403).json({
+        error: user.error,
+      });
     }
 
     res.status(200).json({ message: user.message });
@@ -91,14 +101,14 @@ const sendForgetPasswordMail = async (req, res) => {
 
 const resetPassword = async (req, res) => {
   try {
-    const userId = req.params.user-id;
+    const { userId } = req.params;
     const userData = req.body;
-
-    console.log('User id: ', userId, userData);
 
     const user = await userService.resetPassword(userId, userData);
     if (user?.error) {
-      return res.status(403).send(user.error);
+      return res.status(403).json({
+        error: user.error,
+      });
     }
 
     res.status(200).json({ user });
