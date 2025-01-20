@@ -7,6 +7,7 @@ const {
   comparePassword,
   getAccessToken,
 } = require('../utils/helpers');
+const mailFunction = require('../utils/mail');
 
 const registerUser = async (userData) => {
   try {
@@ -48,6 +49,19 @@ const registerUser = async (userData) => {
       numberOfTokensLeft: 50,
     });
     await newUser.save();
+
+    // await mailFunction(
+    //   'Confirmation: Registration Mail',
+    //   `<body>
+    //     <p>Dear ${firstName},</p>
+    //     <p>Thank you for registering with Sleuther AI.</p>
+    //     <p><strong>Good to have you onboard.</strong></p>
+    //     <p>We will keep you posted with further details through mail.</p>
+    //     <p>Regards,<br/>Team Sleuther AI</p>
+    //   </body>`,
+    //   email,
+    //   firstName,
+    // );
 
     const accessToken = getAccessToken(newUser);
     return {
@@ -117,7 +131,10 @@ const getUser = async (userId) => {
     return {
       id: userId,
       name: user.name,
+      firstName: user.firstName,
+      lastName: user.lastName,
       email: user.email,
+      numberOfTokensLeft: user.numberOfTokensLeft,
     };
   } catch (error) {
     return {
@@ -130,6 +147,32 @@ const deleteUser = async (userId) => {
   try {
     const user = await User.findByIdAndDelete(userId);
     return user;
+  } catch (error) {
+    return {
+      error: error,
+    };
+  }
+}
+
+const sendForgetPasswordMail = async (email) => {
+  try {
+    const user = await User.findOne({ email });
+    if (!user) {
+      return {
+        error: `User doesn't exist, Please use different email address`,
+      };
+    }
+
+    // await mailFunction(
+    //   'Sleuther AI: Reset Password',
+    //   `Please click on the link below to reset your password`,
+    //   user.email,
+    //   user.firstName,
+    // );
+
+    return {
+      message: 'Reset password mail sent successfully'
+    };
   } catch (error) {
     return {
       error: error,
@@ -162,7 +205,8 @@ const resetPassword = async (userId, userData) => {
 
     return {
       id: updatedUser._id,
-      name: updatedUser.name,
+      firstName: updatedUser.firstName,
+      lastName: updatedUser.lastName,
       email: updatedUser.email,
     };
   } catch (error) {
@@ -177,5 +221,6 @@ module.exports = {
   loginUser,
   getUser,
   deleteUser,
+  sendForgetPasswordMail,
   resetPassword,
 };

@@ -297,7 +297,8 @@ fieldset textarea {
     max-width: 100%;
     resize: none;
 }
-.home-page-main{
+
+.home-page-main {
     padding: 0px;
 }
 
@@ -305,14 +306,17 @@ fieldset textarea {
     width: 130px;
     height: calc(100vh - 56px);
 }
-.home-page-main .sidebar ul li a{
+
+.home-page-main .sidebar ul li a {
     display: flex;
     flex-direction: column;
 }
+
 .home-page-main .chat-show {
     width: 200px;
     height: calc(100vh - 56px);
 }
+
 .home-page-main .sidebar-logo {
     font-weight: bold;
     text-transform: uppercase;
@@ -337,45 +341,54 @@ fieldset textarea {
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
 }
-.home-page-main .tip-text{
+
+.home-page-main .tip-text {
     font-size: 12px;
     color: #000;
     font-weight: 400;
 }
-.home-page-main .tip-text span{
+
+.home-page-main .tip-text span {
     font-weight: 700;
 }
-.home-page-main .tip-text a{
+
+.home-page-main .tip-text a {
     font-size: 12px;
     color: #000;
     font-weight: 700;
     text-decoration: none;
 }
-.home-page-main .bottom-text{
+
+.home-page-main .bottom-text {
     column-gap: 60px;
     padding-top: 10px;
 }
-.signup-line span a{
+
+.signup-line span a {
     text-decoration: none;
     color: #000;
     font-weight: 500;
 }
-.prompt-ul{
+
+.prompt-ul {
     list-style: none;
     display: flex;
     column-gap: 25px;
 }
-.prompt-ul li a{
+
+.prompt-ul li a {
     text-decoration: none;
     color: #000;
 }
-.written-text{
+
+.written-text {
     text-align: right;
     display: flex;
     justify-content: end;
     padding-top: 40px;
 }
-.written-text p{
+
+.written-text p {
     text-align: right;
     background-color: #f4f2f2;
     height: 40px;
@@ -387,21 +400,25 @@ fieldset textarea {
     padding: 0px 15px;
     border-radius: 8px;
 }
-.plumbing-sec{
+
+.plumbing-sec {
     column-gap: 10px;
 }
-.text-border-box{
+
+.text-border-box {
     text-align: left;
     border: 1px solid #000;
     border-radius: 10px;
     padding: 15px;
 }
-.text-border-box .left{
+
+.text-border-box .left {
     display: flex;
     column-gap: 10px;
     padding-top: 10px;
 }
-.text-border-box .left a{
+
+.text-border-box .left a {
     color: #000;
     text-decoration: none;
     font-size: 12px;
@@ -409,12 +426,14 @@ fieldset textarea {
     padding: 5px 10px;
     border-radius: 24px;
 }
-.text-border-box .right{
+
+.text-border-box .right {
     display: flex;
     column-gap: 10px;
     padding-top: 10px;
 }
-.text-border-box .right a{
+
+.text-border-box .right a {
     color: #000;
     text-decoration: none;
     font-size: 12px;
@@ -422,31 +441,38 @@ fieldset textarea {
     padding: 5px 10px;
     border-radius: 24px;
 }
-.text-border-box .left ul{
+
+.text-border-box .left ul {
     display: flex;
     padding: 0px;
 }
-.response{
+
+.response {
     column-gap: 30px;
 }
-.response .text-res-sec ul{
+
+.response .text-res-sec ul {
     list-style: none;
     column-gap: 20px;
 }
-.response .text-res-sec .chat-logo img{
+
+.response .text-res-sec .chat-logo img {
     height: 24px;
     width: auto;
     object-fit: contain;
 }
-.bottom-input{
+
+.bottom-input {
     position: absolute;
     bottom: 20px;
     width: 75%;
 }
-.search-bar .search-box{
+
+.search-bar .search-box {
     width: 80%;
 }
-.search-bar .search-box input{
+
+.search-bar .search-box input {
     width: 100%;
     border: 2px solid #dcdcdc;
     padding: 10px 10px;
@@ -454,35 +480,127 @@ fieldset textarea {
     border-radius: 30px;
     font-size: 12px;
 }
-.search-bar .search-box input:focus{
+
+.search-bar .search-box input:focus {
     border: 2px solid #dcdcdc;
 }
-.search-bar .search-box input:active{
+
+.search-bar .search-box input:active {
     border: 2px solid #dcdcdc;
 }
-.comment-text .accordion .card{
+
+.comment-text .accordion .card {
     background: none;
     border: none;
 }
-.comment-text .accordion .card-header{
+
+.comment-text .accordion .card-header {
     background: none;
     border: none;
 }
-.comment-text .accordion .card-header .btn{
+
+.comment-text .accordion .card-header .btn {
     text-decoration: none;
     outline: none;
     box-shadow: none;
     color: #b0b0b0;
 }
-.comment-text .accordion .card-header span{
+
+.comment-text .accordion .card-header span {
     color: #000;
     padding-right: 8px;
 }
-.comment-text .accordion .card .card-body{
+
+.comment-text .accordion .card .card-body {
     background: #f4f2f2;
 }
-.dark-text{
+
+.dark-text {
     color: #000;
     font-weight: 500;
     padding-left: 15px;
+}
+
+.pricing-sec .pricing-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.pricing-sec .card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    min-height: 100%;
+    text-align: left;
+}
+
+.pricing-sec .card:hover {
+    transform: translateY(-15px);
+}
+
+.pricing-sec .card-title {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.pricing-sec .price {
+    font-size: 32px;
+    font-weight: bold;
+    color: #333;
+    display: flex;
+    column-gap: 5px;
+    align-items: end;
+}
+.pricing-sec .price .sub-price{
+    padding-bottom: 15px;
+}
+.pricing-sec .price span{
+    display: flex;
+    flex-direction: column;
+    font-size: 10px;
+    line-height: 8px;
+    color: #b0b0b0;
+}
+.pricing-sec .btn-current {
+    background-color: #ddd;
+    color: #555;
+    cursor: default;
+    pointer-events: none;
+    border-radius: 20px;
+}
+
+.pricing-sec .btn-upgrade {
+    background-color: #000;
+    color: #fff;
+    border-radius: 20px;
+    padding: 10px 20px;
+}
+
+.pricing-sec .btn-upgrade:hover {
+    background-color: #333;
+}
+
+.pricing-sec .features {
+    margin-top: 20px;
+    font-size: 14px;
+    list-style: disc;
+    padding-left: 20px;
+}
+
+.pricing-sec .features li {
+    margin-bottom: 10px;
+}
+
+.pricing-sec .restrictions {
+    text-align: center;
+    font-size: 12px;
+    color: #999;
+    position: absolute;
+    bottom: 0px;
+}
+
+.pricing-sec p.bottom-line {
+    font-size: 13px;
+    height: 40px;
 }

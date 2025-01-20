@@ -8,6 +8,10 @@ const config = {
     NODE_ENV: process.env.NODE_ENV,
     PORT: process.env.PORT,
     SALT_ROUNDS: process.env.SALT_ROUNDS,
+    BREVO_USER_NAME: process.env.BREVO_USER_NAME,
+    BREVO_EMAIL: process.env.BREVO_EMAIL,
+    BREVO_API: process.env.BREVO_API,
+    BREVO_API_KEY: process.env.BREVO_API_KEY,
   },
   production: {
     DB_NAME: process.env.DB_NAME,
@@ -18,6 +22,8 @@ const config = {
     NODE_ENV: process.env.NODE_ENV,
     PORT: process.env.PORT,
     SALT_ROUNDS: process.env.SALT_ROUNDS,
+    BREVO_API: process.env.BREVO_API,
+    BREVO_API_KEY: process.env.BREVO_API_KEY,
   },
 };
 

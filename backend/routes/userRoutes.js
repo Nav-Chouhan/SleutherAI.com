@@ -8,6 +8,7 @@ user.post('/', userController.registerUser);
 user.post('/access-token', userController.loginUser);
 user.get('/:userId', authMiddleware, userController.getUser);
 user.delete('/:userId', authMiddleware, userController.deleteUser);
+user.post('/send-reset-password-mail', userController.sendForgetPasswordMail);
 user.patch('/:userId/reset-password', authMiddleware, userController.resetPassword);
 
 module.exports = user;
