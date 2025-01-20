@@ -991,3 +991,149 @@ html {
   opacity: 0.5;
   cursor: not-allowed;
 }
+
+/* AI Preferences Styles */
+.ai-preferences-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: left;
+  border-top: 1px solid #e9ecef;
+}
+
+.preferences-title {
+  font-size: 26px;
+  font-weight: 700;
+  color: #191c1f;
+}
+
+.preferences-label {
+  font-size: 14px;
+  color: #191c1f;
+  margin-bottom: 8px;
+  font-weight: 400;
+}
+
+.preferences-select {
+  width: 100%;
+  padding: 10px 19px;
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  background-color: Grey/EBE7E7;
+  color: #212529;
+  font-size: 14px;
+}
+
+.preferences-divider {
+  border-top: 1px solid #a0a6ac;
+  margin: 24px 0;
+}
+
+.format-options,
+.conciseness-options {
+  display: flex;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.format-btn,
+.conciseness-btn {
+  padding: 14px 22px;
+  border: none;
+  border-radius: 100px;
+  background: transparent;
+  color: #212529;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.format-btn.active,
+.conciseness-btn.active {
+  background: #f8f9fa;
+  font-weight: 600;
+}
+
+.preferences-switch .form-check-input {
+  width: 50px;
+  height: 24px;
+  margin-top: 0;
+}
+
+.preferences-switch .form-check-input:checked {
+  background-color: #212529;
+  border-color: #212529;
+  width: 44px;
+}
+
+.save-btn {
+  background: #212529;
+  color: white;
+  border: none;
+  border-radius: 100px;
+  padding: 8px 24px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.save-btn:hover {
+  background: #000000;
+}
+
+/* Reset Password Styles */
+.reset-mail-container {
+  max-width: 400px;
+  margin: 80px auto;
+  padding: 20px;
+}
+
+.reset-mail-content {
+  text-align: center;
+}
+
+.reset-mail-content h2 {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  color: #191c1f;
+}
+
+.reset-mail-content .description {
+  color: #6c757d;
+  margin-bottom: 24px;
+}
+
+.reset-mail-content fieldset {
+  margin-bottom: 16px;
+  text-align: left;
+}
+
+.reset-mail-content label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 14px;
+  color: #191c1f;
+}
+
+.reset-mail-content .form-control {
+  width: 100%;
+  padding: 10px 16px;
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.reset-mail-content .form-control:focus {
+  border-color: #191c1f;
+  box-shadow: none;
+}
+
+.reset-mail-content .alert {
+  margin-bottom: 16px;
+  font-size: 14px;
+}
+
+.reset-mail-content button.loading {
+  opacity: 0.7;
+  cursor: not-allowed;
+}

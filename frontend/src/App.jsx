@@ -18,6 +18,7 @@ import CommentsPage from "./Pages/CommentsPage";
 import PricingPlan from "./Pages/PricingPlan";
 import UserProfile from "./Pages/UserProfile";
 import Loader from "./Components/Loader";
+import AiPreferences from "./Pages/AiPreferences";
 
 const ProtectedRoute = ({ children }) => {
   const { authState } = useAuth();
@@ -77,11 +78,22 @@ function App() {
               </ProtectedRoute>
             }
           />
+          <Route
+            path="/ai-preferences"
+            element={
+              <ProtectedRoute>
+                <AiPreferences />
+              </ProtectedRoute>
+            }
+          />
 
           {/* password reset pages */}
           <Route path="/user/mailpage" element={<ResetMailPage />} />
 
-          <Route path="/:localStorage/:userId" element={<ForgetPassword />} />
+          <Route
+            path="/:user-id/forgot-password"
+            element={<ForgetPassword />}
+          />
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>

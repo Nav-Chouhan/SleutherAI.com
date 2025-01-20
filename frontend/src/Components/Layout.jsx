@@ -17,6 +17,7 @@ function Layout() {
     "/fourth-step",
     "/fifth-step",
     "/pricing",
+    "/:user-id/forgot-password",
   ];
   // Modal
   const [profileModalState, setProfileModalstate] = useState({
@@ -144,17 +145,16 @@ function Layout() {
   };
 
   // Handle login function
-  const handleLogin = async (formData) => {
-    const { email, password } = formData;
+  const handleLogin = async (data) => {
     try {
-      if (!password || !email) {
+      if (!data.email || !data.password) {
         console.log("Please provide all required fields.");
         return;
       }
 
       const payload = {
-        email,
-        password,
+        email: data.email,
+        password: data.password,
       };
 
       const response = await axiosInstance.post(
@@ -167,22 +167,35 @@ function Layout() {
         return;
       }
 
-      if (response.data.user?.accessToken) {
-        localStorage.setItem("authToken", response.data.user.accessToken);
-        localStorage.setItem("user-id", response.data.user.id);
+      // Check if we have a valid response with user data
+      if (response.data?.user) {
+        const { accessToken, id } = response.data.user;
+
+        // Store auth data
+        localStorage.setItem("authToken", accessToken);
+        localStorage.setItem("user-id", id);
+
+        // Update auth context
         setAuthState({
           isAuthenticated: true,
-          token: response.data.user.accessToken,
+          token: accessToken,
           user: response.data.user,
         });
-        navigate(`/${response.data.user.id}/user`);
+
+        // Navigate to user's dashboard
+        navigate(`/${id}/user`);
       } else {
-        console.error("No access token received.");
+        throw new Error("Invalid response format from server");
       }
     } catch (error) {
+      console.error("Login error:", error);
       const errorMessage =
-        error.response?.data?.message || "An unexpected error occurred.";
-      console.error("Error in handleSignUp:", errorMessage);
+        error.response?.data?.message ||
+        error.message ||
+        "An unexpected error occurred during login.";
+      console.error("Error details:", errorMessage);
+
+      // show this error to the user through some UI component
     }
   };
 

@@ -1,8 +1,10 @@
 import React from "react";
 import { FaPhoneAlt, FaEnvelope, FaPen } from "react-icons/fa";
 import SideBar from "./../Components/SideBar";
+import { useNavigate } from "react-router-dom";
 
 const UserProfile = () => {
+  const navigate = useNavigate();
   return (
     <section className="land-sec home-page-main">
       <div className="container-fluid p-0">
@@ -11,7 +13,7 @@ const UserProfile = () => {
             <div className="d-flex">
               <SideBar />
               <div
-                className="flex-grow-1 d-flex justify-content-center align-items-start p-4"
+                className="flex-grow-1 d-flex justify-content-center align-items-start p-4 pt-5"
                 style={{ backgroundColor: "#f8f9fa" }}
               >
                 <div className="profile-modal-container p-4">
@@ -20,7 +22,10 @@ const UserProfile = () => {
                     <button
                       className="profile-modal-close btn-close"
                       aria-label="Close"
-                      onClick={() => console.log("Close Modal")}
+                      onClick={() => {
+                        const userId = localStorage.getItem("user-id");
+                        navigate(`/${userId}/chats-page`);
+                      }}
                     ></button>
                   </div>
 

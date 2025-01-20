@@ -1,6 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useOutletContext } from "react-router-dom";
 
 function PricingPlan() {
+  const { setPage } = useOutletContext();
+  useEffect(() => {
+    setPage("pricing");
+  }, []);
   return (
     <div className="container">
       <h2 className="pricing-header">Upgrade your plan</h2>

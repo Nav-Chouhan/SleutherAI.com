@@ -32,10 +32,10 @@ to reduce the risk of moisture damage.`
           </div>
         </div>
 
-        <div className="d-flex justify-content-between align-items-end text-end ">
-          <div className="d-flex align-items-center gap-2 mb-3">
+        <div className="d-flex justify-content-between align-items-end text-end">
+          <div className="d-flex align-items-center gap-3 mb-3">
             <FaTag size={14} className="text-muted" />
-            <div className="border-0 w-auto">
+            <div className="border-0 w-auto p-2">
               <select className="form-select form-select-sm border-0 w-auto">
                 <option>Plumbing</option>
                 <option>Electrical</option>

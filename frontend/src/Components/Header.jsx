@@ -69,7 +69,7 @@ function Header({ page, profileModalState, setProfileModalState }) {
               <ul className="menu-bar">
                 <li
                   onClick={handleMouseLeaveModalArea}
-                  className="cursor-pointer "
+                  className="cursor-pointer"
                 >
                   <Link
                     onMouseEnter={handleMouseEnterIcon}
@@ -78,6 +78,25 @@ function Header({ page, profileModalState, setProfileModalState }) {
                   >
                     <MdAccountCircle />
                   </Link>
+                </li>
+              </ul>
+            </div>
+          )}
+          {page == "pricing" && (
+            <div className="col-xl-2 col-lg-2 col-md-12 col-sm-12">
+              <ul className="menu-bar">
+                <li
+                  onClick={handleMouseLeaveModalArea}
+                  className="cursor-pointer "
+                >
+                  <button
+                    className="profile-modal-close btn-close ms-7 pt-2"
+                    aria-label="Close"
+                    onClick={() => {
+                      const userId = localStorage.getItem("user-id");
+                      navigate(`/${userId}/chats-page`);
+                    }}
+                  ></button>
                 </li>
               </ul>
             </div>

@@ -55,7 +55,7 @@ const ProfileModal = () => {
           </li>
           <li className="list-group-item border-0 px-0">
             <button
-              // onClick={() => handleNavigation("/settings")}
+              onClick={() => handleNavigation("/ai-preferences")}
               className="btn btn-link text-start w-100 d-flex align-items-center gap-2 fs-5"
             >
               <FaCog className="text-muted" /> Settings
