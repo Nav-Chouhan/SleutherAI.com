@@ -5,12 +5,13 @@ import Button from "../Components/before-onboarding/Button";
 import { useNavigate, useOutletContext } from "react-router-dom";
 
 function LandingPage() {
-  const { page, setPage, setSopInput } = useOutletContext();
+  const { setPage, setSopInput, setProfileModalstate } = useOutletContext();
   const navigate = useNavigate();
 
   // updating step flow
   useEffect(() => {
     setPage("landing");
+    setProfileModalstate(false);
   }, []);
 
   //handle submit button

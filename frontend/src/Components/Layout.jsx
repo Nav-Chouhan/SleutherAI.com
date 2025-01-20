@@ -1,11 +1,31 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "./Header";
-import { Outlet, useNavigate } from "react-router-dom";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import axiosInstance from "../utils/axiosInstance";
 import { useAuth } from "../context/AuthContext";
 
 function Layout() {
   const navigate = useNavigate();
+  const location = useLocation();
+  const { pathname } = location;
+  const publicRoutes = [
+    "/",
+    "/login",
+    "/user/mailpage",
+    "/second-step",
+    "/third-step",
+    "/fourth-step",
+    "/fifth-step",
+    "/pricing",
+    "/:user-id/forgot-password",
+  ];
+  // Modal
+  const [profileModalState, setProfileModalstate] = useState({
+    isShown: false,
+    type: "add",
+    profiledata: null,
+  });
+
   // State declarations
   const [step, setStep] = useState(1);
   const [page, setPage] = useState("landing");
@@ -13,15 +33,68 @@ function Layout() {
   const [paraType, setParaType] = useState("Paragraph");
   const [inspectorType, setInspectorType] = useState("We");
   const [conciseness, setConciseness] = useState("Very concise");
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  const [promptInput, setPromptInput] = useState("");
   const { setAuthState } = useAuth(); //auth state from context
 
+  //auth api call
+  const authResponse = async (authToken, userId) => {
+    try {
+      if (!authToken) {
+        console.log("auth token is not present.");
+        return;
+      }
+      const response = await axiosInstance.get(`/api/user/${userId}`, {
+        headers: {
+          Authorization: authToken,
+        },
+      });
+      return response;
+    } catch (error) {
+      const errorMessage =
+        error.response?.data?.message || "An unexpected error occurred.";
+      console.error("Error in handleSignUp:", errorMessage);
+    }
+  };
+
+  // Auth redirect function
+  useEffect(() => {
+    const authenticateUser = async () => {
+      const authToken = localStorage.getItem("authToken");
+      const userId = localStorage.getItem("user-id");
+
+      if (authToken && userId) {
+        const response = await authResponse(authToken, userId);
+
+        if (response?.data?.error) {
+          console.error("API Error:", response.data.error);
+          navigate("/login");
+          return;
+        }
+
+        if (response?.data?.user?.id) {
+          setAuthState({
+            isAuthenticated: true,
+            token: response.data.user.authToken,
+            user: response.data.user,
+          });
+
+          if (pathname === "/" || pathname === "/login") {
+            navigate(`/${response.data.user.id}/user`);
+          }
+        }
+      } else {
+        if (!publicRoutes.includes(pathname)) {
+          navigate("*");
+        }
+      }
+    };
+
+    authenticateUser();
+  }, [pathname, navigate]);
+
   // Handle signup function
-  const handleSignUp = async () => {
+  const handleSignUp = async (formData) => {
+    const { firstName, lastName, email, password, confirmPassword } = formData;
     try {
       if (!firstName || !lastName || !password || !email) {
         console.log("Please provide all required fields.");
@@ -33,7 +106,7 @@ function Layout() {
         return;
       }
 
-      const response = await axiosInstance.post("/api/user", {
+      const payload = {
         sop: sopInput,
         format: paraType,
         reference: inspectorType,
@@ -43,32 +116,97 @@ function Layout() {
         email,
         password,
         confirmPassword,
-      });
+      };
+
+      const response = await axiosInstance.post("/api/user", payload);
 
       if (response.data?.error) {
-        console.error(response.data.error);
+        console.error("API Error:", response.data.error);
         return;
       }
 
-      if (response.data.user.accessToken) {
+      if (response.data.user?.accessToken) {
         localStorage.setItem("authToken", response.data.user.accessToken);
+        localStorage.setItem("user-id", response.data.user.id);
         setAuthState({
           isAuthenticated: true,
-          token: response.data.accessToken,
+          token: response.data.user.accessToken,
           user: response.data.user,
         });
-        navigate("/homepage");
+        navigate(`/${response.data.user.id}/user`);
+      } else {
+        console.error("No access token received.");
       }
     } catch (error) {
       const errorMessage =
         error.response?.data?.message || "An unexpected error occurred.";
-      console.error(errorMessage);
+      console.error("Error in handleSignUp:", errorMessage);
+    }
+  };
+
+  // Handle login function
+  const handleLogin = async (data) => {
+    try {
+      if (!data.email || !data.password) {
+        console.log("Please provide all required fields.");
+        return;
+      }
+
+      const payload = {
+        email: data.email,
+        password: data.password,
+      };
+
+      const response = await axiosInstance.post(
+        "/api/user/access-token",
+        payload
+      );
+
+      if (response.data?.error) {
+        console.error("API Error:", response.data.error);
+        return;
+      }
+
+      // Check if we have a valid response with user data
+      if (response.data?.user) {
+        const { accessToken, id } = response.data.user;
+
+        // Store auth data
+        localStorage.setItem("authToken", accessToken);
+        localStorage.setItem("user-id", id);
+
+        // Update auth context
+        setAuthState({
+          isAuthenticated: true,
+          token: accessToken,
+          user: response.data.user,
+        });
+
+        // Navigate to user's dashboard
+        navigate(`/${id}/user`);
+      } else {
+        throw new Error("Invalid response format from server");
+      }
+    } catch (error) {
+      console.error("Login error:", error);
+      const errorMessage =
+        error.response?.data?.message ||
+        error.message ||
+        "An unexpected error occurred during login.";
+      console.error("Error details:", errorMessage);
+
+      // show this error to the user through some UI component
     }
   };
 
   return (
     <div>
-      <Header page={page} />
+      <Header
+        page={page}
+        profileModalState={profileModalState}
+        setProfileModalstate={setProfileModalstate}
+      />
+
       <main>
         <Outlet
           context={{
@@ -82,17 +220,11 @@ function Layout() {
             setInspectorType,
             conciseness,
             setConciseness,
-            firstName,
-            setFirstName,
-            lastName,
-            setLastName,
-            email,
-            setEmail,
-            password,
-            setPassword,
-            confirmPassword,
-            setConfirmPassword,
             handleSignUp,
+            handleLogin,
+            promptInput,
+            setPromptInput,
+            setProfileModalstate,
           }}
         />
       </main>
